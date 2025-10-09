@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SARIF Manager - UI Mockups Index</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body style="background: var(--bg-secondary);">
+  <div style="max-width: 1200px; margin: 0 auto; padding: var(--spacing-2xl);">
+    <!-- Header -->
+    <div style="text-align: center; margin-bottom: var(--spacing-2xl);">
+      <div style="width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-dark)); border-radius: var(--border-radius-lg); display: inline-flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 36px; margin-bottom: var(--spacing-lg);">
+        S
+      </div>
+      <h1 style="font-size: 36px; font-weight: 700; margin-bottom: var(--spacing-sm);">SARIF Manager</h1>
+      <p style="font-size: 18px; color: var(--text-secondary); margin-bottom: var(--spacing-lg);">
+        UI Mockups & Design System
+      </p>
+      <div style="display: inline-flex; gap: var(--spacing-sm); background: var(--bg-primary); padding: 8px; border-radius: var(--border-radius-lg); border: 1px solid var(--border-color);">
+        <span class="badge badge-info">v1.0</span>
+        <span class="badge badge-fixed">5 Pages</span>
+        <span class="badge badge-new">October 2025</span>
+      </div>
+    </div>
+
+    <!-- Quick Start -->
+    <div class="card" style="margin-bottom: var(--spacing-2xl);">
+      <div class="card-header">
+        <h3 class="card-title">🚀 Quick Start</h3>
+      </div>
+      <div class="card-body">
+        <p style="margin-bottom: var(--spacing-md); line-height: 1.6;">
+          Это коллекция статических HTML/CSS макетов для визуализации дизайна системы SARIF Manager - 
+          платформы для консолидации отчетов безопасности (SAST, DAST, SCA) в формате SARIF.
+        </p>
+        <div style="display: flex; gap: var(--spacing-md);">
+          <a href="dashboard.html" class="btn btn-primary">
+            <span>👀</span>
+            Посмотреть Dashboard
+          </a>
+          <a href="components/components-showcase.html" class="btn btn-outline">
+            <span>🎨</span>
+            Component Showcase
+          </a>
+          <a href="README.md" class="btn btn-outline" target="_blank">
+            <span>📖</span>
+            Документация
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pages Grid -->
+    <div class="card" style="margin-bottom: var(--spacing-2xl);">
+      <div class="card-header">
+        <h3 class="card-title">📄 Страницы макетов</h3>
+      </div>
+      <div class="card-body" style="padding: 0;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+          <!-- Dashboard -->
+          <a href="dashboard.html" style="text-decoration: none; color: inherit; padding: var(--spacing-lg); border-bottom: 1px solid var(--border-color); border-right: 1px solid var(--border-color); transition: background 0.2s ease;"
+             onmouseover="this.style.background='var(--bg-secondary)'"
+             onmouseout="this.style.background='transparent'">
+            <div style="font-size: 32px; margin-bottom: var(--spacing-sm);">📊</div>
+            <h4 style="font-size: 16px; font-weight: 600; margin-bottom: 6px;">Dashboard</h4>
+            <p class="text-sm text-muted" style="margin-bottom: var(--spacing-sm);">
+              Главная страница с overview метриками, графиками и статистикой по проектам
+            </p>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <span class="text-xs" style="padding: 2px 6px; background: var(--bg-tertiary); border-radius: 4px;">Stats Cards</span>
+              <span class="text-xs" style="padding: 2px 6px; background: var(--bg-tertiary); border-radius: 4px;">Charts</span>
+              <span class="text-xs" style="padding: 2px 6px; background: var(--bg-tertiary); border-radius: 4px;">Recent Findings</span>
+            </div>
+          </a>
+
+          <!-- Projects -->
+          <a href="projects.html" style="text-decoration: none; color: inherit; padding: var(--spacing-lg); border-bottom: 1px solid var(--border-color); border-right: 1px solid var(--border-color); transition: background 0.2s ease;"
+             onmouseover="this.style.background='var(--bg-secondary)'"
+             onmouseout="this.style.background='transparent'">
+            <div style="font-size: 32px; margin-bottom: var(--spacing-sm);">📁</div>
+            <h4 style="font-size: 16px; font-weight: 600; margin-bottom: 6px;">Projects</h4>
+            <p class="text-sm text-muted" style="margin-bottom: var(--spacing-sm);">
+              Управление проектами безопасности с карточками и статистикой
+            </p>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <span class="text-xs" style="padding: 2px 6px; background: var(--bg-tertiary); border-radius: 4px;">Search</span>
+              <span class="text-xs" style="padding: 2px 6px; background: var(--bg-tertiary); border-radius: 4px;">Grid View</span>
+              <span class="text-xs" style="padding: 2px 6px; background: var(--bg-tertiary); border-radius: 4px;">Modal</span>
+            </div>
+          </a>
+
+          <!-- Findings -->
+          <a href="findings.html" style="text-decoration: none; color: inherit; padding: var(--spacing-lg); border-bottom: 1px solid var(--border-color); border-right: 1px solid var(--border-color); transition: background 0.2s ease;"
+             onmouseover="this.style.background='var(--bg-secondary)'"
+             onmouseout="this.style.background='transparent'">
+            <div style="font-size: 32px; margin-bottom: var(--spacing-sm);">🔍</div>
+            <h4 style="font-size: 16px; font-weight: 600; margin-bottom: 6px;">Findings Table</h4>
+            <p class="text-sm text-muted" style="margin-bottom: var(--spacing-sm);">
+              Таблица находок с расширенной фильтрацией, поиском и сортировкой
+            </p>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <span class="text-xs" style="padding: 2px 6px; background: var(--bg-tertiary); border-radius: 4px;">Filters</span>
+              <span class="text-xs" style="padding: 2px 6px; background: var(--bg-tertiary); border-radius: 4px;">Table</span>
+              <span class="text-xs" style="padding: 2px 6px; background: var(--bg-tertiary); border-radius: 4px;">Pagination</span>
+            </div>
+          </a>
+
+          <!-- Finding Detail -->
+          <a href="finding-detail.html" style="text-decoration: none; color: inherit; padding: var(--spacing-lg); border-bottom: 1px solid var(--border-color); transition: background 0.2s ease;"
+             onmouseover="this.style.background='var(--bg-secondary)'"
+             onmouseout="this.style.background='transparent'">
+            <div style="font-size: 32px; margin-bottom: var(--spacing-sm);">📋</div>
+            <h4 style="font-size: 16px; font-weight: 600; margin-bottom: 6px;">Finding Detail</h4>
+            <p class="text-sm text-muted" style="margin-bottom: var(--spacing-sm);">
+              Детальный просмотр уязвимости с code snippet, fix examples и комментариями
+            </p>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <span class="text-xs" style="padding: 2px 6px; background: var(--bg-tertiary); border-radius: 4px;">Code Highlight</span>
+              <span class="text-xs" style="padding: 2px 6px; background: var(--bg-tertiary); border-radius: 4px;">Comments</span>
+              <span class="text-xs" style="padding: 2px 6px; background: var(--bg-tertiary); border-radius: 4px;">Metadata</span>
+            </div>
+          </a>
+
+          <!-- Upload -->
+          <a href="upload.html" style="text-decoration: none; color: inherit; padding: var(--spacing-lg); border-bottom: 1px solid var(--border-color); transition: background 0.2s ease;"
+             onmouseover="this.style.background='var(--bg-secondary)'"
+             onmouseout="this.style.background='transparent'">
+            <div style="font-size: 32px; margin-bottom: var(--spacing-sm);">⬆️</div>
+            <h4 style="font-size: 16px; font-weight: 600; margin-bottom: 6px;">Upload SARIF</h4>
+            <p class="text-sm text-muted" style="margin-bottom: var(--spacing-sm);">
+              Загрузка SARIF отчетов с drag & drop, progress tracking и validation
+            </p>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <span class="text-xs" style="padding: 2px 6px; background: var(--bg-tertiary); border-radius: 4px;">Drag & Drop</span>
+              <span class="text-xs" style="padding: 2px 6px; background: var(--bg-tertiary); border-radius: 4px;">Progress</span>
+              <span class="text-xs" style="padding: 2px 6px; background: var(--bg-tertiary); border-radius: 4px;">Tools List</span>
+            </div>
+          </a>
+
+          <!-- Component Showcase -->
+          <a href="components/components-showcase.html" style="text-decoration: none; color: inherit; padding: var(--spacing-lg); border-bottom: 1px solid var(--border-color); transition: background 0.2s ease;"
+             onmouseover="this.style.background='var(--bg-secondary)'"
+             onmouseout="this.style.background='transparent'">
+            <div style="font-size: 32px; margin-bottom: var(--spacing-sm);">🎨</div>
+            <h4 style="font-size: 16px; font-weight: 600; margin-bottom: 6px;">Component Showcase</h4>
+            <p class="text-sm text-muted" style="margin-bottom: var(--spacing-sm);">
+              Каталог переиспользуемых UI компонентов и дизайн системы
+            </p>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <span class="text-xs" style="padding: 2px 6px; background: var(--bg-tertiary); border-radius: 4px;">Badges</span>
+              <span class="text-xs" style="padding: 2px 6px; background: var(--bg-tertiary); border-radius: 4px;">Buttons</span>
+              <span class="text-xs" style="padding: 2px 6px; background: var(--bg-tertiary); border-radius: 4px;">Forms</span>
+              <span class="text-xs" style="padding: 2px 6px; background: var(--bg-tertiary); border-radius: 4px;">Colors</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Design System -->
+    <div class="card" style="margin-bottom: var(--spacing-2xl);">
+      <div class="card-header">
+        <h3 class="card-title">🎨 Дизайн система</h3>
+      </div>
+      <div class="card-body">
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--spacing-2xl);">
+          <!-- Colors -->
+          <div>
+            <h4 style="font-size: 14px; font-weight: 600; margin-bottom: var(--spacing-md);">Severity Colors</h4>
+            <div style="display: flex; gap: var(--spacing-sm); margin-bottom: var(--spacing-lg);">
+              <span class="badge badge-critical">Critical</span>
+              <span class="badge badge-high">High</span>
+              <span class="badge badge-medium">Medium</span>
+              <span class="badge badge-low">Low</span>
+              <span class="badge badge-info">Info</span>
+            </div>
+
+            <h4 style="font-size: 14px; font-weight: 600; margin-bottom: var(--spacing-md);">Status Colors</h4>
+            <div style="display: flex; gap: var(--spacing-sm);">
+              <span class="badge badge-new">New</span>
+              <span class="badge badge-confirmed">Confirmed</span>
+              <span class="badge badge-false-positive">False Positive</span>
+              <span class="badge badge-fixed">Fixed</span>
+            </div>
+          </div>
+
+          <!-- Components -->
+          <div>
+            <h4 style="font-size: 14px; font-weight: 600; margin-bottom: var(--spacing-md);">Key Components</h4>
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+              <li class="text-sm">✓ Badges (Severity & Status)</li>
+              <li class="text-sm">✓ Buttons (Primary, Secondary, Outline)</li>
+              <li class="text-sm">✓ Cards & Stat Cards</li>
+              <li class="text-sm">✓ Tables с сортировкой</li>
+              <li class="text-sm">✓ Search & Filter компоненты</li>
+              <li class="text-sm">✓ Form Elements</li>
+              <li class="text-sm">✓ Code Blocks с подсветкой</li>
+              <li class="text-sm">✓ Modal Dialogs</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features -->
+    <div class="card" style="margin-bottom: var(--spacing-2xl);">
+      <div class="card-header">
+        <h3 class="card-title">✨ Основные возможности</h3>
+      </div>
+      <div class="card-body">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-lg);">
+          <div>
+            <div style="font-size: 24px; margin-bottom: var(--spacing-sm);">📊</div>
+            <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 6px;">Dashboard & Analytics</h4>
+            <p class="text-sm text-muted">
+              Визуализация метрик, графики распределения, статистика по инструментам
+            </p>
+          </div>
+
+          <div>
+            <div style="font-size: 24px; margin-bottom: var(--spacing-sm);">🔍</div>
+            <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 6px;">Advanced Filtering</h4>
+            <p class="text-sm text-muted">
+              Мощная фильтрация по severity, status, tool, текстовый поиск
+            </p>
+          </div>
+
+          <div>
+            <div style="font-size: 24px; margin-bottom: var(--spacing-sm);">📋</div>
+            <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 6px;">Detailed Views</h4>
+            <p class="text-sm text-muted">
+              Полная информация о находках с code snippets и fix examples
+            </p>
+          </div>
+
+          <div>
+            <div style="font-size: 24px; margin-bottom: var(--spacing-sm);">⬆️</div>
+            <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 6px;">SARIF Upload</h4>
+            <p class="text-sm text-muted">
+              Drag & drop загрузка, поддержка SAST/DAST/SCA инструментов
+            </p>
+          </div>
+
+          <div>
+            <div style="font-size: 24px; margin-bottom: var(--spacing-sm);">🎨</div>
+            <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 6px;">Modern UI</h4>
+            <p class="text-sm text-muted">
+              Современный дизайн с Tailwind подходом, clean & minimal
+            </p>
+          </div>
+
+          <div>
+            <div style="font-size: 24px; margin-bottom: var(--spacing-sm);">📱</div>
+            <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 6px;">Responsive</h4>
+            <p class="text-sm text-muted">
+              Адаптивный дизайн для desktop, tablet и mobile устройств
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tech Stack -->
+    <div class="card" style="margin-bottom: var(--spacing-2xl);">
+      <div class="card-header">
+        <h3 class="card-title">🛠️ Технологический стек</h3>
+      </div>
+      <div class="card-body">
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--spacing-lg);">
+          <div>
+            <h4 style="font-size: 14px; font-weight: 600; margin-bottom: var(--spacing-md);">Текущие макеты</h4>
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px;">
+              <li class="text-sm">• Pure HTML5 & CSS3</li>
+              <li class="text-sm">• Modern CSS (CSS Variables, Flexbox, Grid)</li>
+              <li class="text-sm">• Emoji icons (placeholder)</li>
+              <li class="text-sm">• Minimal JavaScript (demos only)</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 style="font-size: 14px; font-weight: 600; margin-bottom: var(--spacing-md);">Production реализация</h4>
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px;">
+              <li class="text-sm">• Angular 17+ (Standalone Components)</li>
+              <li class="text-sm">• TypeScript 5+</li>
+              <li class="text-sm">• Angular Material UI</li>
+              <li class="text-sm">• Tailwind CSS</li>
+              <li class="text-sm">• Chart.js для графиков</li>
+              <li class="text-sm">• ASP.NET Core Web API</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div style="text-align: center; padding: var(--spacing-2xl); color: var(--text-secondary);">
+      <p class="text-sm">
+        SARIF Manager UI Mockups • October 2025 • v1.0
+      </p>
+      <p class="text-xs text-muted" style="margin-top: 8px;">
+        Для полной документации см. 
+        <a href="README.md" target="_blank" style="color: var(--primary-blue);">README.md</a> 
+        и 
+        <a href="../ARCHITECTURE.md" target="_blank" style="color: var(--primary-blue);">ARCHITECTURE.md</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>
+

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Component Showcase - SARIF Manager</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="../dashboard.html" class="sidebar-logo">
+          <div class="sidebar-logo-icon">S</div>
+          <span class="sidebar-logo-text">SARIF Manager</span>
+        </a>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Main</div>
+        <a href="../dashboard.html" class="nav-item">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="../projects.html" class="nav-item">
+          <span class="nav-icon">📁</span>
+          <span>Projects</span>
+        </a>
+        
+        <div class="nav-section-title" style="margin-top: 24px;">Developer</div>
+        <a href="components-showcase.html" class="nav-item active">
+          <span class="nav-icon">🎨</span>
+          <span>Component Showcase</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Page Header -->
+      <header class="page-header">
+        <div>
+          <h1 class="page-title">Component Showcase</h1>
+          <p class="page-subtitle">Reusable UI components and design patterns</p>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <div class="page-content">
+        <!-- Severity Badges -->
+        <div class="card mb-lg">
+          <div class="card-header">
+            <h3 class="card-title">Severity Badges</h3>
+          </div>
+          <div class="card-body">
+            <p class="text-sm text-muted" style="margin-bottom: var(--spacing-lg);">
+              Used to display finding severity levels throughout the application.
+            </p>
+            <div style="display: flex; gap: var(--spacing-md); flex-wrap: wrap;">
+              <span class="badge badge-critical">Critical</span>
+              <span class="badge badge-high">High</span>
+              <span class="badge badge-medium">Medium</span>
+              <span class="badge badge-low">Low</span>
+              <span class="badge badge-info">Info</span>
+            </div>
+            <div style="margin-top: var(--spacing-lg); padding: var(--spacing-md); background: var(--bg-tertiary); border-radius: var(--border-radius);">
+              <code style="font-size: 13px; display: block; white-space: pre; font-family: monospace;">
+&lt;span class="badge badge-critical"&gt;Critical&lt;/span&gt;
+&lt;span class="badge badge-high"&gt;High&lt;/span&gt;
+&lt;span class="badge badge-medium"&gt;Medium&lt;/span&gt;
+&lt;span class="badge badge-low"&gt;Low&lt;/span&gt;
+&lt;span class="badge badge-info"&gt;Info&lt;/span&gt;</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- Status Badges -->
+        <div class="card mb-lg">
+          <div class="card-header">
+            <h3 class="card-title">Status Badges</h3>
+          </div>
+          <div class="card-body">
+            <p class="text-sm text-muted" style="margin-bottom: var(--spacing-lg);">
+              Used to indicate the current status of findings in the lifecycle.
+            </p>
+            <div style="display: flex; gap: var(--spacing-md); flex-wrap: wrap;">
+              <span class="badge badge-new">New</span>
+              <span class="badge badge-confirmed">Confirmed</span>
+              <span class="badge badge-false-positive">False Positive</span>
+              <span class="badge badge-fixed">Fixed</span>
+            </div>
+            <div style="margin-top: var(--spacing-lg); padding: var(--spacing-md); background: var(--bg-tertiary); border-radius: var(--border-radius);">
+              <code style="font-size: 13px; display: block; white-space: pre; font-family: monospace;">
+&lt;span class="badge badge-new"&gt;New&lt;/span&gt;
+&lt;span class="badge badge-confirmed"&gt;Confirmed&lt;/span&gt;
+&lt;span class="badge badge-false-positive"&gt;False Positive&lt;/span&gt;
+&lt;span class="badge badge-fixed"&gt;Fixed&lt;/span&gt;</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="card mb-lg">
+          <div class="card-header">
+            <h3 class="card-title">Buttons</h3>
+          </div>
+          <div class="card-body">
+            <div style="display: flex; flex-direction: column; gap: var(--spacing-2xl);">
+              <!-- Primary Buttons -->
+              <div>
+                <h4 style="font-size: 14px; font-weight: 600; margin-bottom: var(--spacing-md);">Primary</h4>
+                <div style="display: flex; gap: var(--spacing-md); flex-wrap: wrap; align-items: center;">
+                  <button class="btn btn-primary">Primary Button</button>
+                  <button class="btn btn-primary btn-sm">Small Primary</button>
+                  <button class="btn btn-primary">
+                    <span>✓</span>
+                    With Icon
+                  </button>
+                  <button class="btn btn-primary btn-icon">
+                    <span>+</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Secondary Buttons -->
+              <div>
+                <h4 style="font-size: 14px; font-weight: 600; margin-bottom: var(--spacing-md);">Secondary</h4>
+                <div style="display: flex; gap: var(--spacing-md); flex-wrap: wrap; align-items: center;">
+                  <button class="btn btn-secondary">Secondary Button</button>
+                  <button class="btn btn-secondary btn-sm">Small Secondary</button>
+                  <button class="btn btn-secondary">
+                    <span>⚙️</span>
+                    Settings
+                  </button>
+                </div>
+              </div>
+
+              <!-- Outline Buttons -->
+              <div>
+                <h4 style="font-size: 14px; font-weight: 600; margin-bottom: var(--spacing-md);">Outline</h4>
+                <div style="display: flex; gap: var(--spacing-md); flex-wrap: wrap; align-items: center;">
+                  <button class="btn btn-outline">Outline Button</button>
+                  <button class="btn btn-outline btn-sm">Small Outline</button>
+                  <button class="btn btn-outline">
+                    <span>📤</span>
+                    Export
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top: var(--spacing-lg); padding: var(--spacing-md); background: var(--bg-tertiary); border-radius: var(--border-radius);">
+              <code style="font-size: 13px; display: block; white-space: pre; font-family: monospace;">
+&lt;button class="btn btn-primary"&gt;Primary&lt;/button&gt;
+&lt;button class="btn btn-secondary"&gt;Secondary&lt;/button&gt;
+&lt;button class="btn btn-outline"&gt;Outline&lt;/button&gt;
+&lt;button class="btn btn-primary btn-sm"&gt;Small&lt;/button&gt;
+&lt;button class="btn btn-primary btn-icon"&gt;🔍&lt;/button&gt;</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cards -->
+        <div class="card mb-lg">
+          <div class="card-header">
+            <h3 class="card-title">Cards</h3>
+          </div>
+          <div class="card-body">
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--spacing-lg);">
+              <!-- Basic Card -->
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title">Basic Card</h4>
+                </div>
+                <div class="card-body">
+                  <p class="text-sm">This is a basic card with header and body.</p>
+                </div>
+              </div>
+
+              <!-- Card with Actions -->
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title">Card with Actions</h4>
+                  <button class="btn btn-sm btn-outline">Action</button>
+                </div>
+                <div class="card-body">
+                  <p class="text-sm">This card has an action button in the header.</p>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top: var(--spacing-lg); padding: var(--spacing-md); background: var(--bg-tertiary); border-radius: var(--border-radius);">
+              <code style="font-size: 13px; display: block; white-space: pre; font-family: monospace;">
+&lt;div class="card"&gt;
+  &lt;div class="card-header"&gt;
+    &lt;h3 class="card-title"&gt;Title&lt;/h3&gt;
+  &lt;/div&gt;
+  &lt;div class="card-body"&gt;
+    Content here
+  &lt;/div&gt;
+&lt;/div&gt;</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- Search Box -->
+        <div class="card mb-lg">
+          <div class="card-header">
+            <h3 class="card-title">Search Box</h3>
+          </div>
+          <div class="card-body">
+            <div class="search-box" style="max-width: 400px;">
+              <span>🔍</span>
+              <input type="text" placeholder="Search..." />
+            </div>
+
+            <div style="margin-top: var(--spacing-lg); padding: var(--spacing-md); background: var(--bg-tertiary); border-radius: var(--border-radius);">
+              <code style="font-size: 13px; display: block; white-space: pre; font-family: monospace;">
+&lt;div class="search-box"&gt;
+  &lt;span&gt;🔍&lt;/span&gt;
+  &lt;input type="text" placeholder="Search..." /&gt;
+&lt;/div&gt;</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stat Cards -->
+        <div class="card mb-lg">
+          <div class="card-header">
+            <h3 class="card-title">Stat Cards</h3>
+          </div>
+          <div class="card-body">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-lg);">
+              <div class="stat-card">
+                <div class="stat-card-header">
+                  <div>
+                    <div class="stat-label">Total Findings</div>
+                    <div class="stat-value">1,247</div>
+                  </div>
+                  <div class="stat-icon" style="background: #eff6ff; color: #2563eb;">
+                    🔍
+                  </div>
+                </div>
+                <div class="stat-trend positive">
+                  <span>↓</span>
+                  <span>12% from last week</span>
+                </div>
+              </div>
+
+              <div class="stat-card">
+                <div class="stat-card-header">
+                  <div>
+                    <div class="stat-label">Critical</div>
+                    <div class="stat-value" style="color: var(--severity-critical);">47</div>
+                  </div>
+                  <div class="stat-icon" style="background: #fee2e2; color: var(--severity-critical);">
+                    🚨
+                  </div>
+                </div>
+                <div class="stat-trend negative">
+                  <span>↑</span>
+                  <span>5 new this week</span>
+                </div>
+              </div>
+
+              <div class="stat-card">
+                <div class="stat-card-header">
+                  <div>
+                    <div class="stat-label">Fixed</div>
+                    <div class="stat-value" style="color: var(--status-fixed);">234</div>
+                  </div>
+                  <div class="stat-icon" style="background: #d1fae5; color: var(--status-fixed);">
+                    ✓
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top: var(--spacing-lg); padding: var(--spacing-md); background: var(--bg-tertiary); border-radius: var(--border-radius);">
+              <code style="font-size: 13px; display: block; white-space: pre; font-family: monospace;">
+&lt;div class="stat-card"&gt;
+  &lt;div class="stat-card-header"&gt;
+    &lt;div&gt;
+      &lt;div class="stat-label"&gt;Label&lt;/div&gt;
+      &lt;div class="stat-value"&gt;1,247&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="stat-icon"&gt;🔍&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="stat-trend positive"&gt;
+    &lt;span&gt;↓&lt;/span&gt;
+    &lt;span&gt;Trend text&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- Forms -->
+        <div class="card mb-lg">
+          <div class="card-header">
+            <h3 class="card-title">Form Elements</h3>
+          </div>
+          <div class="card-body">
+            <div style="max-width: 500px;">
+              <div class="form-group">
+                <label class="form-label">Text Input</label>
+                <input type="text" class="form-input" placeholder="Enter text..." />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Select</label>
+                <select class="form-input">
+                  <option>Option 1</option>
+                  <option>Option 2</option>
+                  <option>Option 3</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Textarea</label>
+                <textarea class="form-input form-textarea" placeholder="Enter longer text..."></textarea>
+              </div>
+            </div>
+
+            <div style="margin-top: var(--spacing-lg); padding: var(--spacing-md); background: var(--bg-tertiary); border-radius: var(--border-radius);">
+              <code style="font-size: 13px; display: block; white-space: pre; font-family: monospace;">
+&lt;div class="form-group"&gt;
+  &lt;label class="form-label"&gt;Label&lt;/label&gt;
+  &lt;input type="text" class="form-input" /&gt;
+&lt;/div&gt;</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- Code Block -->
+        <div class="card mb-lg">
+          <div class="card-header">
+            <h3 class="card-title">Code Block</h3>
+          </div>
+          <div class="card-body">
+            <div class="code-block">
+<span style="color: #6b7280;">1 |</span> <span style="color: #e5e7eb;">function example() {</span>
+<span style="color: #6b7280;">2 |</span> <span style="color: #e5e7eb;">  console.log(</span><span style="color: #34d399;">"Hello World"</span><span style="color: #e5e7eb;">);</span>
+<span style="color: #6b7280;">3 |</span> <span style="color: #e5e7eb;">}</span>
+            </div>
+
+            <div style="margin-top: var(--spacing-lg);">
+              <p class="text-sm">Inline code: <code>const variable = "value";</code></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Colors -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Color Palette</h3>
+          </div>
+          <div class="card-body">
+            <!-- Severity Colors -->
+            <div style="margin-bottom: var(--spacing-lg);">
+              <h4 style="font-size: 14px; font-weight: 600; margin-bottom: var(--spacing-md);">Severity Colors</h4>
+              <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--spacing-md);">
+                <div>
+                  <div style="height: 60px; background: var(--severity-critical); border-radius: var(--border-radius); margin-bottom: 8px;"></div>
+                  <div class="text-xs text-bold">Critical</div>
+                  <div class="text-xs text-muted">#dc2626</div>
+                </div>
+                <div>
+                  <div style="height: 60px; background: var(--severity-high); border-radius: var(--border-radius); margin-bottom: 8px;"></div>
+                  <div class="text-xs text-bold">High</div>
+                  <div class="text-xs text-muted">#ea580c</div>
+                </div>
+                <div>
+                  <div style="height: 60px; background: var(--severity-medium); border-radius: var(--border-radius); margin-bottom: 8px;"></div>
+                  <div class="text-xs text-bold">Medium</div>
+                  <div class="text-xs text-muted">#f59e0b</div>
+                </div>
+                <div>
+                  <div style="height: 60px; background: var(--severity-low); border-radius: var(--border-radius); margin-bottom: 8px;"></div>
+                  <div class="text-xs text-bold">Low</div>
+                  <div class="text-xs text-muted">#84cc16</div>
+                </div>
+                <div>
+                  <div style="height: 60px; background: var(--severity-info); border-radius: var(--border-radius); margin-bottom: 8px;"></div>
+                  <div class="text-xs text-bold">Info</div>
+                  <div class="text-xs text-muted">#06b6d4</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Status Colors -->
+            <div>
+              <h4 style="font-size: 14px; font-weight: 600; margin-bottom: var(--spacing-md);">Status Colors</h4>
+              <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--spacing-md);">
+                <div>
+                  <div style="height: 60px; background: var(--status-new); border-radius: var(--border-radius); margin-bottom: 8px;"></div>
+                  <div class="text-xs text-bold">New</div>
+                  <div class="text-xs text-muted">#8b5cf6</div>
+                </div>
+                <div>
+                  <div style="height: 60px; background: var(--status-confirmed); border-radius: var(--border-radius); margin-bottom: 8px;"></div>
+                  <div class="text-xs text-bold">Confirmed</div>
+                  <div class="text-xs text-muted">#f97316</div>
+                </div>
+                <div>
+                  <div style="height: 60px; background: var(--status-false-positive); border-radius: var(--border-radius); margin-bottom: 8px;"></div>
+                  <div class="text-xs text-bold">False Positive</div>
+                  <div class="text-xs text-muted">#64748b</div>
+                </div>
+                <div>
+                  <div style="height: 60px; background: var(--status-fixed); border-radius: var(--border-radius); margin-bottom: 8px;"></div>
+                  <div class="text-xs text-bold">Fixed</div>
+                  <div class="text-xs text-muted">#10b981</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
+

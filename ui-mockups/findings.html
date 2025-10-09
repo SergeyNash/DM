@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Findings - SARIF Manager</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="sidebar-logo">
+          <div class="sidebar-logo-icon">S</div>
+          <span class="sidebar-logo-text">SARIF Manager</span>
+        </a>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Main</div>
+        <a href="dashboard.html" class="nav-item">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="projects.html" class="nav-item active">
+          <span class="nav-icon">📁</span>
+          <span>Projects</span>
+        </a>
+        
+        <div class="nav-section-title" style="margin-top: 24px;">Actions</div>
+        <a href="upload.html" class="nav-item">
+          <span class="nav-icon">⬆️</span>
+          <span>Upload SARIF</span>
+        </a>
+        <a href="#" class="nav-item">
+          <span class="nav-icon">📤</span>
+          <span>Export Data</span>
+        </a>
+        
+        <div class="nav-section-title" style="margin-top: 24px;">Settings</div>
+        <a href="#" class="nav-item">
+          <span class="nav-icon">⚙️</span>
+          <span>Settings</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Page Header -->
+      <header class="page-header">
+        <div>
+          <div style="display: flex; align-items: center; gap: var(--spacing-md); margin-bottom: 6px;">
+            <a href="projects.html" style="color: var(--text-secondary); text-decoration: none; font-size: 14px;">← Back to Projects</a>
+          </div>
+          <h1 class="page-title">Backend API - Findings</h1>
+          <p class="page-subtitle">487 findings from 3 security reports</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn btn-outline">
+            <span>📤</span>
+            Export CSV
+          </button>
+          <button class="btn btn-outline">
+            <span>⚙️</span>
+            Bulk Actions
+          </button>
+          <button class="btn btn-primary" onclick="window.location.href='upload.html'">
+            <span>⬆️</span>
+            Upload SARIF
+          </button>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <div class="page-content">
+        <!-- Quick Stats -->
+        <div class="stats-grid" style="grid-template-columns: repeat(5, 1fr); margin-bottom: var(--spacing-lg);">
+          <div class="stat-card" style="padding: var(--spacing-md);">
+            <div class="stat-label">Total</div>
+            <div class="stat-value" style="font-size: 24px;">487</div>
+          </div>
+          <div class="stat-card" style="padding: var(--spacing-md);">
+            <div class="stat-label">Critical</div>
+            <div class="stat-value" style="font-size: 24px; color: var(--severity-critical);">5</div>
+          </div>
+          <div class="stat-card" style="padding: var(--spacing-md);">
+            <div class="stat-label">High</div>
+            <div class="stat-value" style="font-size: 24px; color: var(--severity-high);">7</div>
+          </div>
+          <div class="stat-card" style="padding: var(--spacing-md);">
+            <div class="stat-label">Medium</div>
+            <div class="stat-value" style="font-size: 24px; color: var(--severity-medium);">24</div>
+          </div>
+          <div class="stat-card" style="padding: var(--spacing-md);">
+            <div class="stat-label">New</div>
+            <div class="stat-value" style="font-size: 24px; color: var(--status-new);">38</div>
+          </div>
+        </div>
+
+        <!-- Filters and Search -->
+        <div class="card mb-lg">
+          <div class="card-body">
+            <!-- Search Bar -->
+            <div class="search-box" style="margin-bottom: var(--spacing-md);">
+              <span>🔍</span>
+              <input type="text" placeholder="Search by rule ID, message, file path..." />
+            </div>
+            
+            <!-- Filter Chips -->
+            <div style="display: flex; gap: var(--spacing-md); flex-wrap: wrap; margin-bottom: var(--spacing-md);">
+              <!-- Quick Filters -->
+              <div style="display: flex; gap: var(--spacing-sm); flex-wrap: wrap;">
+                <button class="btn btn-sm btn-outline" style="background: #eff6ff; border-color: var(--primary-blue); color: var(--primary-blue);">
+                  All Findings (487)
+                </button>
+                <button class="btn btn-sm btn-outline">
+                  🔥 Critical & High (12)
+                </button>
+                <button class="btn btn-sm btn-outline">
+                  ⭐ New (38)
+                </button>
+                <button class="btn btn-sm btn-outline">
+                  ✓ Confirmed (142)
+                </button>
+              </div>
+            </div>
+
+            <!-- Advanced Filters -->
+            <div style="display: flex; gap: var(--spacing-sm); flex-wrap: wrap;">
+              <div style="position: relative;">
+                <button class="btn btn-sm btn-outline" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'block' ? 'none' : 'block'">
+                  Severity: All
+                  <span>▼</span>
+                </button>
+                <div style="display: none; position: absolute; top: 100%; left: 0; margin-top: 4px; background: white; border: 1px solid var(--border-color); border-radius: var(--border-radius); padding: var(--spacing-sm); box-shadow: var(--shadow-lg); z-index: 10; min-width: 180px;">
+                  <label style="display: flex; align-items: center; padding: 6px; cursor: pointer;">
+                    <input type="checkbox" style="margin-right: 8px;" checked />
+                    <span class="badge badge-critical" style="margin-right: 8px;">Critical</span>
+                    <span class="text-sm">5</span>
+                  </label>
+                  <label style="display: flex; align-items: center; padding: 6px; cursor: pointer;">
+                    <input type="checkbox" style="margin-right: 8px;" checked />
+                    <span class="badge badge-high" style="margin-right: 8px;">High</span>
+                    <span class="text-sm">7</span>
+                  </label>
+                  <label style="display: flex; align-items: center; padding: 6px; cursor: pointer;">
+                    <input type="checkbox" style="margin-right: 8px;" checked />
+                    <span class="badge badge-medium" style="margin-right: 8px;">Medium</span>
+                    <span class="text-sm">24</span>
+                  </label>
+                  <label style="display: flex; align-items: center; padding: 6px; cursor: pointer;">
+                    <input type="checkbox" style="margin-right: 8px;" checked />
+                    <span class="badge badge-low" style="margin-right: 8px;">Low</span>
+                    <span class="text-sm">38</span>
+                  </label>
+                  <label style="display: flex; align-items: center; padding: 6px; cursor: pointer;">
+                    <input type="checkbox" style="margin-right: 8px;" checked />
+                    <span class="badge badge-info" style="margin-right: 8px;">Info</span>
+                    <span class="text-sm">13</span>
+                  </label>
+                </div>
+              </div>
+
+              <div style="position: relative;">
+                <button class="btn btn-sm btn-outline">
+                  Status: All
+                  <span>▼</span>
+                </button>
+              </div>
+
+              <div style="position: relative;">
+                <button class="btn btn-sm btn-outline">
+                  Tool: All
+                  <span>▼</span>
+                </button>
+              </div>
+
+              <button class="btn btn-sm btn-outline" style="color: var(--text-tertiary);">
+                🔄 Reset Filters
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Findings Table -->
+        <div class="card">
+          <div class="card-header">
+            <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <h3 class="card-title">487 Findings</h3>
+              <div style="display: flex; gap: var(--spacing-sm); align-items: center;">
+                <span class="text-sm text-muted">Sort by:</span>
+                <button class="btn btn-sm btn-outline">
+                  Severity
+                  <span>↓</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="card-body" style="padding: 0;">
+            <div class="table-container">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 40px;">
+                      <input type="checkbox" />
+                    </th>
+                    <th style="width: 100px;">Severity</th>
+                    <th style="width: 180px;">Rule ID</th>
+                    <th>Message</th>
+                    <th style="width: 200px;">File</th>
+                    <th style="width: 120px;">Tool</th>
+                    <th style="width: 120px;">Status</th>
+                    <th style="width: 80px;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Finding Row 1 - Critical -->
+                  <tr onclick="window.location.href='finding-detail.html'">
+                    <td><input type="checkbox" onclick="event.stopPropagation()" /></td>
+                    <td><span class="badge badge-critical">Critical</span></td>
+                    <td><code style="font-size: 12px;">sql-injection</code></td>
+                    <td>
+                      <div style="max-width: 500px;">
+                        <div style="font-weight: 500; margin-bottom: 2px;">SQL injection vulnerability in user input</div>
+                        <div class="text-xs text-muted">Unsanitized user input is directly concatenated into SQL query</div>
+                      </div>
+                    </td>
+                    <td>
+                      <code style="font-size: 12px;">api/users.ts:124</code>
+                    </td>
+                    <td>
+                      <span style="padding: 4px 8px; background: var(--bg-tertiary); border-radius: 4px; font-size: 12px;">SonarQube</span>
+                    </td>
+                    <td>
+                      <span class="badge badge-new">New</span>
+                    </td>
+                    <td>
+                      <div style="display: flex; gap: 4px;">
+                        <button class="btn btn-icon btn-sm" title="View Details" onclick="event.stopPropagation(); window.location.href='finding-detail.html'">
+                          👁️
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- Finding Row 2 - Critical -->
+                  <tr onclick="window.location.href='finding-detail.html'">
+                    <td><input type="checkbox" onclick="event.stopPropagation()" /></td>
+                    <td><span class="badge badge-critical">Critical</span></td>
+                    <td><code style="font-size: 12px;">xss-reflected</code></td>
+                    <td>
+                      <div style="max-width: 500px;">
+                        <div style="font-weight: 500; margin-bottom: 2px;">Reflected XSS vulnerability detected</div>
+                        <div class="text-xs text-muted">User input reflected in response without proper encoding</div>
+                      </div>
+                    </td>
+                    <td>
+                      <code style="font-size: 12px;">api/search.ts:67</code>
+                    </td>
+                    <td>
+                      <span style="padding: 4px 8px; background: var(--bg-tertiary); border-radius: 4px; font-size: 12px;">OWASP ZAP</span>
+                    </td>
+                    <td>
+                      <span class="badge badge-confirmed">Confirmed</span>
+                    </td>
+                    <td>
+                      <div style="display: flex; gap: 4px;">
+                        <button class="btn btn-icon btn-sm" title="View Details">
+                          👁️
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- Finding Row 3 - High -->
+                  <tr>
+                    <td><input type="checkbox" onclick="event.stopPropagation()" /></td>
+                    <td><span class="badge badge-high">High</span></td>
+                    <td><code style="font-size: 12px;">weak-crypto</code></td>
+                    <td>
+                      <div style="max-width: 500px;">
+                        <div style="font-weight: 500; margin-bottom: 2px;">Use of weak cryptographic algorithm (MD5)</div>
+                        <div class="text-xs text-muted">MD5 is cryptographically broken and should not be used</div>
+                      </div>
+                    </td>
+                    <td>
+                      <code style="font-size: 12px;">utils/hash.ts:45</code>
+                    </td>
+                    <td>
+                      <span style="padding: 4px 8px; background: var(--bg-tertiary); border-radius: 4px; font-size: 12px;">Semgrep</span>
+                    </td>
+                    <td>
+                      <span class="badge badge-new">New</span>
+                    </td>
+                    <td>
+                      <div style="display: flex; gap: 4px;">
+                        <button class="btn btn-icon btn-sm" title="View Details">
+                          👁️
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- Finding Row 4 - High -->
+                  <tr>
+                    <td><input type="checkbox" onclick="event.stopPropagation()" /></td>
+                    <td><span class="badge badge-high">High</span></td>
+                    <td><code style="font-size: 12px;">path-traversal</code></td>
+                    <td>
+                      <div style="max-width: 500px;">
+                        <div style="font-weight: 500; margin-bottom: 2px;">Path traversal vulnerability in file handler</div>
+                        <div class="text-xs text-muted">User-controlled path without validation enables directory traversal</div>
+                      </div>
+                    </td>
+                    <td>
+                      <code style="font-size: 12px;">handlers/file.ts:156</code>
+                    </td>
+                    <td>
+                      <span style="padding: 4px 8px; background: var(--bg-tertiary); border-radius: 4px; font-size: 12px;">CodeQL</span>
+                    </td>
+                    <td>
+                      <span class="badge badge-confirmed">Confirmed</span>
+                    </td>
+                    <td>
+                      <div style="display: flex; gap: 4px;">
+                        <button class="btn btn-icon btn-sm" title="View Details">
+                          👁️
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- Finding Row 5 - Medium -->
+                  <tr>
+                    <td><input type="checkbox" onclick="event.stopPropagation()" /></td>
+                    <td><span class="badge badge-medium">Medium</span></td>
+                    <td><code style="font-size: 12px;">insecure-random</code></td>
+                    <td>
+                      <div style="max-width: 500px;">
+                        <div style="font-weight: 500; margin-bottom: 2px;">Use of insecure random number generator</div>
+                        <div class="text-xs text-muted">Math.random() is not cryptographically secure</div>
+                      </div>
+                    </td>
+                    <td>
+                      <code style="font-size: 12px;">utils/token.ts:28</code>
+                    </td>
+                    <td>
+                      <span style="padding: 4px 8px; background: var(--bg-tertiary); border-radius: 4px; font-size: 12px;">Semgrep</span>
+                    </td>
+                    <td>
+                      <span class="badge badge-new">New</span>
+                    </td>
+                    <td>
+                      <div style="display: flex; gap: 4px;">
+                        <button class="btn btn-icon btn-sm" title="View Details">
+                          👁️
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- Finding Row 6 - Medium -->
+                  <tr>
+                    <td><input type="checkbox" onclick="event.stopPropagation()" /></td>
+                    <td><span class="badge badge-medium">Medium</span></td>
+                    <td><code style="font-size: 12px;">csrf-token-missing</code></td>
+                    <td>
+                      <div style="max-width: 500px;">
+                        <div style="font-weight: 500; margin-bottom: 2px;">Missing CSRF token validation</div>
+                        <div class="text-xs text-muted">State-changing operation without CSRF protection</div>
+                      </div>
+                    </td>
+                    <td>
+                      <code style="font-size: 12px;">api/profile.ts:92</code>
+                    </td>
+                    <td>
+                      <span style="padding: 4px 8px; background: var(--bg-tertiary); border-radius: 4px; font-size: 12px;">SonarQube</span>
+                    </td>
+                    <td>
+                      <span class="badge badge-confirmed">Confirmed</span>
+                    </td>
+                    <td>
+                      <div style="display: flex; gap: 4px;">
+                        <button class="btn btn-icon btn-sm" title="View Details">
+                          👁️
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- Finding Row 7 - Low -->
+                  <tr>
+                    <td><input type="checkbox" onclick="event.stopPropagation()" /></td>
+                    <td><span class="badge badge-low">Low</span></td>
+                    <td><code style="font-size: 12px;">missing-rate-limit</code></td>
+                    <td>
+                      <div style="max-width: 500px;">
+                        <div style="font-weight: 500; margin-bottom: 2px;">No rate limiting on API endpoint</div>
+                        <div class="text-xs text-muted">Endpoint vulnerable to abuse without rate limiting</div>
+                      </div>
+                    </td>
+                    <td>
+                      <code style="font-size: 12px;">api/login.ts:34</code>
+                    </td>
+                    <td>
+                      <span style="padding: 4px 8px; background: var(--bg-tertiary); border-radius: 4px; font-size: 12px;">Custom</span>
+                    </td>
+                    <td>
+                      <span class="badge badge-new">New</span>
+                    </td>
+                    <td>
+                      <div style="display: flex; gap: 4px;">
+                        <button class="btn btn-icon btn-sm" title="View Details">
+                          👁️
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- Finding Row 8 - Low -->
+                  <tr>
+                    <td><input type="checkbox" onclick="event.stopPropagation()" /></td>
+                    <td><span class="badge badge-low">Low</span></td>
+                    <td><code style="font-size: 12px;">cors-misconfigured</code></td>
+                    <td>
+                      <div style="max-width: 500px;">
+                        <div style="font-weight: 500; margin-bottom: 2px;">Overly permissive CORS configuration</div>
+                        <div class="text-xs text-muted">CORS allows all origins with credentials</div>
+                      </div>
+                    </td>
+                    <td>
+                      <code style="font-size: 12px;">middleware/cors.ts:12</code>
+                    </td>
+                    <td>
+                      <span style="padding: 4px 8px; background: var(--bg-tertiary); border-radius: 4px; font-size: 12px;">SonarQube</span>
+                    </td>
+                    <td>
+                      <span class="badge badge-false-positive">False Positive</span>
+                    </td>
+                    <td>
+                      <div style="display: flex; gap: 4px;">
+                        <button class="btn btn-icon btn-sm" title="View Details">
+                          👁️
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- Finding Row 9 - Info -->
+                  <tr>
+                    <td><input type="checkbox" onclick="event.stopPropagation()" /></td>
+                    <td><span class="badge badge-info">Info</span></td>
+                    <td><code style="font-size: 12px;">deprecated-api</code></td>
+                    <td>
+                      <div style="max-width: 500px;">
+                        <div style="font-weight: 500; margin-bottom: 2px;">Use of deprecated API method</div>
+                        <div class="text-xs text-muted">Method marked as deprecated, consider migration</div>
+                      </div>
+                    </td>
+                    <td>
+                      <code style="font-size: 12px;">services/cache.ts:78</code>
+                    </td>
+                    <td>
+                      <span style="padding: 4px 8px; background: var(--bg-tertiary); border-radius: 4px; font-size: 12px;">SonarQube</span>
+                    </td>
+                    <td>
+                      <span class="badge badge-fixed">Fixed</span>
+                    </td>
+                    <td>
+                      <div style="display: flex; gap: 4px;">
+                        <button class="btn btn-icon btn-sm" title="View Details">
+                          👁️
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- Finding Row 10 - Info -->
+                  <tr>
+                    <td><input type="checkbox" onclick="event.stopPropagation()" /></td>
+                    <td><span class="badge badge-info">Info</span></td>
+                    <td><code style="font-size: 12px;">unused-import</code></td>
+                    <td>
+                      <div style="max-width: 500px;">
+                        <div style="font-weight: 500; margin-bottom: 2px;">Unused import statement</div>
+                        <div class="text-xs text-muted">Import is declared but never used in the file</div>
+                      </div>
+                    </td>
+                    <td>
+                      <code style="font-size: 12px;">controllers/user.ts:5</code>
+                    </td>
+                    <td>
+                      <span style="padding: 4px 8px; background: var(--bg-tertiary); border-radius: 4px; font-size: 12px;">ESLint</span>
+                    </td>
+                    <td>
+                      <span class="badge badge-new">New</span>
+                    </td>
+                    <td>
+                      <div style="display: flex; gap: 4px;">
+                        <button class="btn btn-icon btn-sm" title="View Details">
+                          👁️
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <!-- Pagination -->
+          <div style="padding: var(--spacing-lg); border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+            <div class="text-sm text-muted">
+              Showing 1-10 of 487 findings
+            </div>
+            <div style="display: flex; gap: var(--spacing-sm);">
+              <button class="btn btn-outline btn-sm" disabled style="opacity: 0.5;">
+                ← Previous
+              </button>
+              <button class="btn btn-outline btn-sm" style="background: var(--primary-blue); color: white; border-color: var(--primary-blue);">
+                1
+              </button>
+              <button class="btn btn-outline btn-sm">2</button>
+              <button class="btn btn-outline btn-sm">3</button>
+              <span style="padding: 0 8px;">...</span>
+              <button class="btn btn-outline btn-sm">49</button>
+              <button class="btn btn-outline btn-sm">
+                Next →
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
+

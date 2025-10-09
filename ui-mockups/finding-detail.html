@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finding Detail - SARIF Manager</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="sidebar-logo">
+          <div class="sidebar-logo-icon">S</div>
+          <span class="sidebar-logo-text">SARIF Manager</span>
+        </a>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Main</div>
+        <a href="dashboard.html" class="nav-item">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="projects.html" class="nav-item active">
+          <span class="nav-icon">📁</span>
+          <span>Projects</span>
+        </a>
+        
+        <div class="nav-section-title" style="margin-top: 24px;">Actions</div>
+        <a href="upload.html" class="nav-item">
+          <span class="nav-icon">⬆️</span>
+          <span>Upload SARIF</span>
+        </a>
+        <a href="#" class="nav-item">
+          <span class="nav-icon">📤</span>
+          <span>Export Data</span>
+        </a>
+        
+        <div class="nav-section-title" style="margin-top: 24px;">Settings</div>
+        <a href="#" class="nav-item">
+          <span class="nav-icon">⚙️</span>
+          <span>Settings</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Page Header -->
+      <header class="page-header">
+        <div style="flex: 1;">
+          <div style="display: flex; align-items: center; gap: var(--spacing-md); margin-bottom: 8px;">
+            <a href="findings.html" style="color: var(--text-secondary); text-decoration: none; font-size: 14px;">← Back to Findings</a>
+            <span class="text-muted">|</span>
+            <button class="btn btn-sm btn-outline" title="Previous Finding">←</button>
+            <button class="btn btn-sm btn-outline" title="Next Finding">→</button>
+          </div>
+          <div style="display: flex; align-items: center; gap: var(--spacing-md);">
+            <h1 class="page-title" style="margin: 0;">SQL Injection Vulnerability</h1>
+            <span class="badge badge-critical">Critical</span>
+          </div>
+          <p class="page-subtitle">Rule: <code>sql-injection</code> • Tool: SonarQube • Found 2 hours ago</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn btn-outline">
+            <span>📋</span>
+            Copy Link
+          </button>
+          <div style="position: relative;">
+            <button class="btn btn-primary" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'flex' ? 'none' : 'flex'">
+              Change Status
+              <span>▼</span>
+            </button>
+            <div style="display: none; position: absolute; top: 100%; right: 0; margin-top: 4px; background: white; border: 1px solid var(--border-color); border-radius: var(--border-radius); padding: var(--spacing-sm); box-shadow: var(--shadow-lg); z-index: 10; min-width: 200px; flex-direction: column; gap: 4px;">
+              <button class="btn btn-outline btn-sm" style="justify-content: flex-start;">
+                <span class="badge badge-new" style="margin-right: 8px;">New</span>
+                Mark as New
+              </button>
+              <button class="btn btn-outline btn-sm" style="justify-content: flex-start;">
+                <span class="badge badge-confirmed" style="margin-right: 8px;">Confirmed</span>
+                Mark as Confirmed
+              </button>
+              <button class="btn btn-outline btn-sm" style="justify-content: flex-start;">
+                <span class="badge badge-false-positive" style="margin-right: 8px;">False Positive</span>
+                Mark as False Positive
+              </button>
+              <button class="btn btn-outline btn-sm" style="justify-content: flex-start;">
+                <span class="badge badge-fixed" style="margin-right: 8px;">Fixed</span>
+                Mark as Fixed
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <div class="page-content">
+        <div style="display: grid; grid-template-columns: 1fr 350px; gap: var(--spacing-2xl);">
+          <!-- Main Content -->
+          <div>
+            <!-- Description Card -->
+            <div class="card mb-lg">
+              <div class="card-header">
+                <h3 class="card-title">Description</h3>
+              </div>
+              <div class="card-body">
+                <p style="margin-bottom: var(--spacing-lg); line-height: 1.6;">
+                  SQL injection vulnerability detected in user input handling. Unsanitized user input is directly concatenated 
+                  into SQL query, allowing attackers to execute arbitrary SQL commands.
+                </p>
+                
+                <div style="padding: var(--spacing-lg); background: #fef3c7; border-left: 4px solid var(--severity-medium); border-radius: var(--border-radius); margin-bottom: var(--spacing-lg);">
+                  <div style="font-weight: 600; margin-bottom: 6px; color: #92400e;">⚠️ Security Impact</div>
+                  <p style="margin: 0; color: #92400e; font-size: 14px;">
+                    This vulnerability allows attackers to manipulate database queries, potentially leading to unauthorized 
+                    data access, data modification, or complete database compromise.
+                  </p>
+                </div>
+
+                <h4 style="font-size: 14px; font-weight: 600; margin-bottom: var(--spacing-sm);">Recommended Fix:</h4>
+                <ul style="margin: 0; padding-left: 20px; line-height: 1.8;">
+                  <li>Use parameterized queries or prepared statements</li>
+                  <li>Implement input validation and sanitization</li>
+                  <li>Apply principle of least privilege to database accounts</li>
+                  <li>Use ORM frameworks that handle SQL escaping automatically</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Location Card -->
+            <div class="card mb-lg">
+              <div class="card-header">
+                <h3 class="card-title">Location</h3>
+                <button class="btn btn-sm btn-outline">
+                  <span>📝</span>
+                  Open in IDE
+                </button>
+              </div>
+              <div class="card-body">
+                <div style="display: flex; align-items: center; gap: var(--spacing-md); margin-bottom: var(--spacing-lg);">
+                  <div style="flex: 1;">
+                    <div class="text-sm text-muted" style="margin-bottom: 4px;">File Path</div>
+                    <code style="font-size: 14px; padding: 6px 10px; background: var(--bg-tertiary); border-radius: 4px; display: inline-block;">
+                      src/api/users.ts
+                    </code>
+                  </div>
+                  <div>
+                    <div class="text-sm text-muted" style="margin-bottom: 4px;">Line</div>
+                    <code style="font-size: 14px; padding: 6px 10px; background: var(--bg-tertiary); border-radius: 4px; display: inline-block;">
+                      124
+                    </code>
+                  </div>
+                  <div>
+                    <div class="text-sm text-muted" style="margin-bottom: 4px;">Column</div>
+                    <code style="font-size: 14px; padding: 6px 10px; background: var(--bg-tertiary); border-radius: 4px; display: inline-block;">
+                      15
+                    </code>
+                  </div>
+                </div>
+
+                <!-- Code Snippet -->
+                <div style="position: relative;">
+                  <div style="position: absolute; top: 8px; right: 8px;">
+                    <button class="btn btn-sm btn-outline" style="font-size: 11px; padding: 4px 8px;">
+                      📋 Copy
+                    </button>
+                  </div>
+                  <div class="code-block">
+<span style="color: #6b7280;">120 |</span> <span style="color: #e5e7eb;">export async function getUsersByRole(role: string) {</span>
+<span style="color: #6b7280;">121 |</span> <span style="color: #e5e7eb;">  const connection = await getDbConnection();</span>
+<span style="color: #6b7280;">122 |</span> <span style="color: #e5e7eb;">  </span>
+<span style="color: #6b7280;">123 |</span> <span style="color: #e5e7eb;">  </span><span style="color: #9ca3af;">// Vulnerable code - SQL injection</span>
+<span style="color: #dc2626; background: #7f1d1d33;">124 |</span> <span style="color: #e5e7eb;">  const query = </span><span style="color: #34d399;">"SELECT * FROM users WHERE role = '"</span> <span style="color: #e5e7eb;">+ role + </span><span style="color: #34d399;">"'"</span><span style="color: #e5e7eb;">;</span>
+<span style="color: #6b7280;">125 |</span> <span style="color: #e5e7eb;">  const result = await connection.query(query);</span>
+<span style="color: #6b7280;">126 |</span> <span style="color: #e5e7eb;">  </span>
+<span style="color: #6b7280;">127 |</span> <span style="color: #e5e7eb;">  return result.rows;</span>
+<span style="color: #6b7280;">128 |</span> <span style="color: #e5e7eb;">}</span>
+                  </div>
+                </div>
+
+                <!-- Fix Example -->
+                <div style="margin-top: var(--spacing-lg); padding: var(--spacing-md); background: #d1fae5; border-left: 4px solid var(--status-fixed); border-radius: var(--border-radius);">
+                  <div style="font-weight: 600; margin-bottom: 8px; color: #065f46;">✓ Recommended Fix</div>
+                  <div class="code-block" style="background: #065f46; margin: 0;">
+<span style="color: #6b7280;">124 |</span> <span style="color: #e5e7eb;">  </span><span style="color: #9ca3af;">// Fixed - Using parameterized query</span>
+<span style="color: #10b981;">125 |</span> <span style="color: #e5e7eb;">  const query = </span><span style="color: #34d399;">"SELECT * FROM users WHERE role = $1"</span><span style="color: #e5e7eb;">;</span>
+<span style="color: #10b981;">126 |</span> <span style="color: #e5e7eb;">  const result = await connection.query(query, [role]);</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SARIF Details Card -->
+            <div class="card mb-lg">
+              <div class="card-header">
+                <h3 class="card-title">SARIF Data</h3>
+                <button class="btn btn-sm btn-outline" onclick="this.parentElement.nextElementSibling.style.display = this.parentElement.nextElementSibling.style.display === 'none' ? 'block' : 'none'">
+                  <span>👁️</span>
+                  Toggle Raw JSON
+                </button>
+              </div>
+              <div class="card-body" style="display: none;">
+                <div class="code-block" style="max-height: 400px; overflow-y: auto;">
+{
+  "ruleId": "sql-injection",
+  "level": "error",
+  "message": {
+    "text": "SQL injection vulnerability in user input"
+  },
+  "locations": [
+    {
+      "physicalLocation": {
+        "artifactLocation": {
+          "uri": "src/api/users.ts"
+        },
+        "region": {
+          "startLine": 124,
+          "startColumn": 15,
+          "endLine": 124,
+          "endColumn": 65
+        }
+      }
+    }
+  ],
+  "fingerprints": {
+    "primaryLocationLineHash": "e8f8c9d2a3b4c5d6"
+  }
+}
+                </div>
+              </div>
+            </div>
+
+            <!-- Comments Section -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Comments (2)</h3>
+              </div>
+              <div class="card-body">
+                <!-- Comment 1 -->
+                <div style="padding: var(--spacing-md); background: var(--bg-secondary); border-radius: var(--border-radius); margin-bottom: var(--spacing-md);">
+                  <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--primary-blue); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 12px;">
+                        JD
+                      </div>
+                      <div>
+                        <div style="font-weight: 600; font-size: 13px;">John Doe</div>
+                        <div class="text-xs text-muted">1 hour ago</div>
+                      </div>
+                    </div>
+                  </div>
+                  <p style="margin: 0; font-size: 14px; line-height: 1.6;">
+                    This is a critical vulnerability that needs immediate attention. I've verified that this code is in 
+                    production and accessible to unauthenticated users.
+                  </p>
+                </div>
+
+                <!-- Comment 2 -->
+                <div style="padding: var(--spacing-md); background: var(--bg-secondary); border-radius: var(--border-radius); margin-bottom: var(--spacing-lg);">
+                  <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <div style="width: 32px; height: 32px; border-radius: 50%; background: #10b981; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 12px;">
+                        AS
+                      </div>
+                      <div>
+                        <div style="font-weight: 600; font-size: 13px;">Alice Smith</div>
+                        <div class="text-xs text-muted">30 minutes ago</div>
+                      </div>
+                    </div>
+                  </div>
+                  <p style="margin: 0; font-size: 14px; line-height: 1.6;">
+                    I've created a PR to fix this issue using parameterized queries. Will deploy to staging for testing.
+                  </p>
+                </div>
+
+                <!-- Add Comment Form -->
+                <div>
+                  <textarea class="form-input form-textarea" placeholder="Add a comment..." style="margin-bottom: var(--spacing-sm);"></textarea>
+                  <div style="display: flex; justify-content: flex-end;">
+                    <button class="btn btn-primary">
+                      Add Comment
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sidebar -->
+          <div>
+            <!-- Metadata Card -->
+            <div class="card mb-lg">
+              <div class="card-header">
+                <h3 class="card-title">Details</h3>
+              </div>
+              <div class="card-body">
+                <div style="display: flex; flex-direction: column; gap: var(--spacing-lg);">
+                  <!-- Status -->
+                  <div>
+                    <div class="text-sm text-muted" style="margin-bottom: 6px;">Status</div>
+                    <span class="badge badge-new">New</span>
+                  </div>
+
+                  <!-- Severity -->
+                  <div>
+                    <div class="text-sm text-muted" style="margin-bottom: 6px;">Severity</div>
+                    <span class="badge badge-critical">Critical</span>
+                  </div>
+
+                  <!-- Tool -->
+                  <div>
+                    <div class="text-sm text-muted" style="margin-bottom: 6px;">Detection Tool</div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <span style="padding: 4px 10px; background: var(--bg-tertiary); border-radius: 4px; font-size: 13px; font-weight: 500;">
+                        SonarQube
+                      </span>
+                      <span class="text-xs text-muted">v9.8.0</span>
+                    </div>
+                  </div>
+
+                  <!-- Project -->
+                  <div>
+                    <div class="text-sm text-muted" style="margin-bottom: 6px;">Project</div>
+                    <a href="findings.html" style="text-decoration: none; color: var(--primary-blue); font-weight: 500;">
+                      Backend API
+                    </a>
+                  </div>
+
+                  <!-- Created -->
+                  <div>
+                    <div class="text-sm text-muted" style="margin-bottom: 6px;">Created</div>
+                    <div class="text-sm">2 hours ago</div>
+                    <div class="text-xs text-muted">Oct 9, 2025 14:15</div>
+                  </div>
+
+                  <!-- Last Updated -->
+                  <div>
+                    <div class="text-sm text-muted" style="margin-bottom: 6px;">Last Updated</div>
+                    <div class="text-sm">30 minutes ago</div>
+                    <div class="text-xs text-muted">Oct 9, 2025 15:45</div>
+                  </div>
+
+                  <!-- Report -->
+                  <div>
+                    <div class="text-sm text-muted" style="margin-bottom: 6px;">Source Report</div>
+                    <div class="text-sm">sonarqube-2024-10-09.sarif</div>
+                    <button class="btn btn-sm btn-outline" style="margin-top: 6px; width: 100%;">
+                      <span>📥</span>
+                      Download Report
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CWE/CVE Card -->
+            <div class="card mb-lg">
+              <div class="card-header">
+                <h3 class="card-title">References</h3>
+              </div>
+              <div class="card-body">
+                <div style="display: flex; flex-direction: column; gap: var(--spacing-md);">
+                  <div>
+                    <div class="text-sm text-bold" style="margin-bottom: 4px;">CWE-89</div>
+                    <a href="https://cwe.mitre.org/data/definitions/89.html" target="_blank" class="text-xs" style="color: var(--primary-blue);">
+                      SQL Injection →
+                    </a>
+                  </div>
+                  
+                  <div style="border-top: 1px solid var(--border-color); padding-top: var(--spacing-md);">
+                    <div class="text-sm text-bold" style="margin-bottom: 6px;">OWASP Top 10</div>
+                    <div class="text-xs text-muted">A03:2021 - Injection</div>
+                  </div>
+
+                  <div style="border-top: 1px solid var(--border-color); padding-top: var(--spacing-md);">
+                    <div class="text-sm text-bold" style="margin-bottom: 8px;">External Links</div>
+                    <div style="display: flex; flex-direction: column; gap: 6px;">
+                      <a href="#" class="text-xs" style="color: var(--primary-blue);">
+                        📚 OWASP SQL Injection Guide →
+                      </a>
+                      <a href="#" class="text-xs" style="color: var(--primary-blue);">
+                        📖 Parameterized Queries Best Practices →
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- History Card -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">History</h3>
+              </div>
+              <div class="card-body">
+                <div style="display: flex; flex-direction: column; gap: var(--spacing-md);">
+                  <!-- History Item 1 -->
+                  <div style="display: flex; gap: var(--spacing-sm); padding-bottom: var(--spacing-md); border-bottom: 1px solid var(--border-color);">
+                    <div style="width: 6px; height: 6px; border-radius: 50%; background: var(--status-new); margin-top: 6px; flex-shrink: 0;"></div>
+                    <div style="flex: 1;">
+                      <div class="text-sm text-bold">Finding Created</div>
+                      <div class="text-xs text-muted">2 hours ago</div>
+                    </div>
+                  </div>
+
+                  <!-- History Item 2 -->
+                  <div style="display: flex; gap: var(--spacing-sm); padding-bottom: var(--spacing-md); border-bottom: 1px solid var(--border-color);">
+                    <div style="width: 6px; height: 6px; border-radius: 50%; background: var(--text-tertiary); margin-top: 6px; flex-shrink: 0;"></div>
+                    <div style="flex: 1;">
+                      <div class="text-sm text-bold">Comment Added</div>
+                      <div class="text-xs text-muted">by John Doe</div>
+                      <div class="text-xs text-muted">1 hour ago</div>
+                    </div>
+                  </div>
+
+                  <!-- History Item 3 -->
+                  <div style="display: flex; gap: var(--spacing-sm);">
+                    <div style="width: 6px; height: 6px; border-radius: 50%; background: var(--text-tertiary); margin-top: 6px; flex-shrink: 0;"></div>
+                    <div style="flex: 1;">
+                      <div class="text-sm text-bold">Comment Added</div>
+                      <div class="text-xs text-muted">by Alice Smith</div>
+                      <div class="text-xs text-muted">30 minutes ago</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
+

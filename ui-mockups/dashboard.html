@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - SARIF Manager</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="sidebar-logo">
+          <div class="sidebar-logo-icon">S</div>
+          <span class="sidebar-logo-text">SARIF Manager</span>
+        </a>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Main</div>
+        <a href="dashboard.html" class="nav-item active">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="projects.html" class="nav-item">
+          <span class="nav-icon">📁</span>
+          <span>Projects</span>
+        </a>
+        
+        <div class="nav-section-title" style="margin-top: 24px;">Actions</div>
+        <a href="upload.html" class="nav-item">
+          <span class="nav-icon">⬆️</span>
+          <span>Upload SARIF</span>
+        </a>
+        <a href="#" class="nav-item">
+          <span class="nav-icon">📤</span>
+          <span>Export Data</span>
+        </a>
+        
+        <div class="nav-section-title" style="margin-top: 24px;">Settings</div>
+        <a href="#" class="nav-item">
+          <span class="nav-icon">⚙️</span>
+          <span>Settings</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Page Header -->
+      <header class="page-header">
+        <div>
+          <h1 class="page-title">Dashboard</h1>
+          <p class="page-subtitle">Overview of security findings across all projects</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn btn-outline btn-icon">
+            <span>🔔</span>
+          </button>
+          <button class="btn btn-primary">
+            <span>⬆️</span>
+            Upload SARIF
+          </button>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <div class="page-content">
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+          <!-- Total Findings -->
+          <div class="stat-card">
+            <div class="stat-card-header">
+              <div>
+                <div class="stat-label">Total Findings</div>
+                <div class="stat-value">1,247</div>
+              </div>
+              <div class="stat-icon" style="background: #eff6ff; color: #2563eb;">
+                🔍
+              </div>
+            </div>
+            <div class="stat-trend positive">
+              <span>↓</span>
+              <span>12% from last week</span>
+            </div>
+          </div>
+
+          <!-- Critical Findings -->
+          <div class="stat-card">
+            <div class="stat-card-header">
+              <div>
+                <div class="stat-label">Critical</div>
+                <div class="stat-value" style="color: var(--severity-critical);">47</div>
+              </div>
+              <div class="stat-icon" style="background: #fee2e2; color: var(--severity-critical);">
+                🚨
+              </div>
+            </div>
+            <div class="stat-trend negative">
+              <span>↑</span>
+              <span>5 new this week</span>
+            </div>
+          </div>
+
+          <!-- High Priority -->
+          <div class="stat-card">
+            <div class="stat-card-header">
+              <div>
+                <div class="stat-label">High</div>
+                <div class="stat-value" style="color: var(--severity-high);">183</div>
+              </div>
+              <div class="stat-icon" style="background: #ffedd5; color: var(--severity-high);">
+                ⚠️
+              </div>
+            </div>
+            <div class="stat-trend positive">
+              <span>↓</span>
+              <span>8% decrease</span>
+            </div>
+          </div>
+
+          <!-- Active Projects -->
+          <div class="stat-card">
+            <div class="stat-card-header">
+              <div>
+                <div class="stat-label">Active Projects</div>
+                <div class="stat-value">12</div>
+              </div>
+              <div class="stat-icon" style="background: #f3e8ff; color: #7c3aed;">
+                📁
+              </div>
+            </div>
+            <div class="stat-trend positive">
+              <span>→</span>
+              <span>No change</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-lg); margin-bottom: var(--spacing-2xl);">
+          <!-- Severity Distribution -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Findings by Severity</h3>
+              <button class="btn btn-sm btn-outline">View All</button>
+            </div>
+            <div class="card-body">
+              <div class="chart-container">
+                <!-- Placeholder for pie chart -->
+                <div style="display: flex; align-items: center; justify-content: center; height: 100%; gap: 32px;">
+                  <div style="text-align: center;">
+                    <div style="width: 200px; height: 200px; border-radius: 50%; background: conic-gradient(
+                      var(--severity-critical) 0% 8%,
+                      var(--severity-high) 8% 22%,
+                      var(--severity-medium) 22% 52%,
+                      var(--severity-low) 52% 85%,
+                      var(--severity-info) 85% 100%
+                    );"></div>
+                  </div>
+                  <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <div style="width: 12px; height: 12px; border-radius: 2px; background: var(--severity-critical);"></div>
+                      <span class="text-sm">Critical: 47 (4%)</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <div style="width: 12px; height: 12px; border-radius: 2px; background: var(--severity-high);"></div>
+                      <span class="text-sm">High: 183 (15%)</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <div style="width: 12px; height: 12px; border-radius: 2px; background: var(--severity-medium);"></div>
+                      <span class="text-sm">Medium: 392 (31%)</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <div style="width: 12px; height: 12px; border-radius: 2px; background: var(--severity-low);"></div>
+                      <span class="text-sm">Low: 438 (35%)</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <div style="width: 12px; height: 12px; border-radius: 2px; background: var(--severity-info);"></div>
+                      <span class="text-sm">Info: 187 (15%)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tool Distribution -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Findings by Tool</h3>
+              <button class="btn btn-sm btn-outline">Details</button>
+            </div>
+            <div class="card-body">
+              <div style="display: flex; flex-direction: column; gap: 16px; padding: 20px 0;">
+                <!-- SonarQube -->
+                <div>
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <span class="text-sm text-bold">SonarQube</span>
+                    <span class="text-sm text-muted">487 findings</span>
+                  </div>
+                  <div style="height: 8px; background: var(--gray-200); border-radius: 4px; overflow: hidden;">
+                    <div style="width: 39%; height: 100%; background: var(--primary-blue);"></div>
+                  </div>
+                </div>
+
+                <!-- Semgrep -->
+                <div>
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <span class="text-sm text-bold">Semgrep</span>
+                    <span class="text-sm text-muted">312 findings</span>
+                  </div>
+                  <div style="height: 8px; background: var(--gray-200); border-radius: 4px; overflow: hidden;">
+                    <div style="width: 25%; height: 100%; background: #10b981;"></div>
+                  </div>
+                </div>
+
+                <!-- OWASP ZAP -->
+                <div>
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <span class="text-sm text-bold">OWASP ZAP</span>
+                    <span class="text-sm text-muted">248 findings</span>
+                  </div>
+                  <div style="height: 8px; background: var(--gray-200); border-radius: 4px; overflow: hidden;">
+                    <div style="width: 20%; height: 100%; background: #f59e0b;"></div>
+                  </div>
+                </div>
+
+                <!-- Snyk -->
+                <div>
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <span class="text-sm text-bold">Snyk</span>
+                    <span class="text-sm text-muted">142 findings</span>
+                  </div>
+                  <div style="height: 8px; background: var(--gray-200); border-radius: 4px; overflow: hidden;">
+                    <div style="width: 11%; height: 100%; background: #8b5cf6;"></div>
+                  </div>
+                </div>
+
+                <!-- Trivy -->
+                <div>
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <span class="text-sm text-bold">Trivy</span>
+                    <span class="text-sm text-muted">58 findings</span>
+                  </div>
+                  <div style="height: 8px; background: var(--gray-200); border-radius: 4px; overflow: hidden;">
+                    <div style="width: 5%; height: 100%; background: #06b6d4;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Findings Table -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Recent Critical & High Findings</h3>
+            <button class="btn btn-sm btn-outline">View All Findings →</button>
+          </div>
+          <div class="card-body" style="padding: 0;">
+            <div class="table-container">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Severity</th>
+                    <th>Rule ID</th>
+                    <th>Message</th>
+                    <th>File</th>
+                    <th>Tool</th>
+                    <th>Status</th>
+                    <th>Project</th>
+                    <th>Created</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="badge badge-critical">Critical</span></td>
+                    <td><code>sql-injection</code></td>
+                    <td>SQL injection vulnerability in user input</td>
+                    <td><code>api/users.ts:124</code></td>
+                    <td>SonarQube</td>
+                    <td><span class="badge badge-new">New</span></td>
+                    <td>Backend API</td>
+                    <td>2 hours ago</td>
+                  </tr>
+                  <tr>
+                    <td><span class="badge badge-critical">Critical</span></td>
+                    <td><code>xss-reflected</code></td>
+                    <td>Reflected XSS vulnerability detected</td>
+                    <td><code>views/profile.jsx:87</code></td>
+                    <td>OWASP ZAP</td>
+                    <td><span class="badge badge-confirmed">Confirmed</span></td>
+                    <td>Frontend App</td>
+                    <td>5 hours ago</td>
+                  </tr>
+                  <tr>
+                    <td><span class="badge badge-high">High</span></td>
+                    <td><code>weak-crypto</code></td>
+                    <td>Use of weak cryptographic algorithm (MD5)</td>
+                    <td><code>utils/hash.py:45</code></td>
+                    <td>Semgrep</td>
+                    <td><span class="badge badge-new">New</span></td>
+                    <td>Auth Service</td>
+                    <td>1 day ago</td>
+                  </tr>
+                  <tr>
+                    <td><span class="badge badge-high">High</span></td>
+                    <td><code>path-traversal</code></td>
+                    <td>Path traversal vulnerability in file handler</td>
+                    <td><code>handlers/file.go:156</code></td>
+                    <td>CodeQL</td>
+                    <td><span class="badge badge-confirmed">Confirmed</span></td>
+                    <td>File Service</td>
+                    <td>1 day ago</td>
+                  </tr>
+                  <tr>
+                    <td><span class="badge badge-high">High</span></td>
+                    <td><code>npm-lodash-4.17.20</code></td>
+                    <td>Prototype pollution in lodash < 4.17.21</td>
+                    <td><code>package.json:12</code></td>
+                    <td>Snyk</td>
+                    <td><span class="badge badge-fixed">Fixed</span></td>
+                    <td>Frontend App</td>
+                    <td>2 days ago</td>
+                  </tr>
+                  <tr>
+                    <td><span class="badge badge-critical">Critical</span></td>
+                    <td><code>hardcoded-secret</code></td>
+                    <td>Hardcoded AWS credentials found in source</td>
+                    <td><code>config/aws.ts:8</code></td>
+                    <td>Semgrep</td>
+                    <td><span class="badge badge-false-positive">False Positive</span></td>
+                    <td>Backend API</td>
+                    <td>3 days ago</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Projects Overview -->
+        <div class="card" style="margin-top: var(--spacing-2xl);">
+          <div class="card-header">
+            <h3 class="card-title">Projects Overview</h3>
+            <button class="btn btn-sm btn-primary">+ New Project</button>
+          </div>
+          <div class="card-body">
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--spacing-lg);">
+              <!-- Project Card 1 -->
+              <div style="border: 1px solid var(--border-color); border-radius: var(--border-radius); padding: var(--spacing-lg); transition: all 0.2s ease; cursor: pointer;" 
+                   onmouseover="this.style.boxShadow='var(--shadow-md)'" 
+                   onmouseout="this.style.boxShadow='none'">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: var(--spacing-md);">
+                  <div>
+                    <h4 style="font-weight: 600; margin-bottom: 4px;">Backend API</h4>
+                    <p class="text-sm text-muted">REST API Service</p>
+                  </div>
+                  <span class="badge badge-critical">12</span>
+                </div>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                  <span class="badge badge-critical" style="font-size: 11px;">5 Critical</span>
+                  <span class="badge badge-high" style="font-size: 11px;">7 High</span>
+                  <span class="badge badge-medium" style="font-size: 11px;">24 Medium</span>
+                </div>
+                <div style="margin-top: var(--spacing-md); padding-top: var(--spacing-md); border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                  <span class="text-xs text-muted">Updated 2h ago</span>
+                  <span class="text-xs text-muted">3 reports</span>
+                </div>
+              </div>
+
+              <!-- Project Card 2 -->
+              <div style="border: 1px solid var(--border-color); border-radius: var(--border-radius); padding: var(--spacing-lg); transition: all 0.2s ease; cursor: pointer;" 
+                   onmouseover="this.style.boxShadow='var(--shadow-md)'" 
+                   onmouseout="this.style.boxShadow='none'">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: var(--spacing-md);">
+                  <div>
+                    <h4 style="font-weight: 600; margin-bottom: 4px;">Frontend App</h4>
+                    <p class="text-sm text-muted">React SPA</p>
+                  </div>
+                  <span class="badge badge-high">8</span>
+                </div>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                  <span class="badge badge-critical" style="font-size: 11px;">2 Critical</span>
+                  <span class="badge badge-high" style="font-size: 11px;">6 High</span>
+                  <span class="badge badge-medium" style="font-size: 11px;">18 Medium</span>
+                </div>
+                <div style="margin-top: var(--spacing-md); padding-top: var(--spacing-md); border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                  <span class="text-xs text-muted">Updated 5h ago</span>
+                  <span class="text-xs text-muted">2 reports</span>
+                </div>
+              </div>
+
+              <!-- Project Card 3 -->
+              <div style="border: 1px solid var(--border-color); border-radius: var(--border-radius); padding: var(--spacing-lg); transition: all 0.2s ease; cursor: pointer;" 
+                   onmouseover="this.style.boxShadow='var(--shadow-md)'" 
+                   onmouseout="this.style.boxShadow='none'">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: var(--spacing-md);">
+                  <div>
+                    <h4 style="font-weight: 600; margin-bottom: 4px;">Auth Service</h4>
+                    <p class="text-sm text-muted">Authentication microservice</p>
+                  </div>
+                  <span class="badge badge-medium">15</span>
+                </div>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                  <span class="badge badge-high" style="font-size: 11px;">4 High</span>
+                  <span class="badge badge-medium" style="font-size: 11px;">11 Medium</span>
+                  <span class="badge badge-low" style="font-size: 11px;">32 Low</span>
+                </div>
+                <div style="margin-top: var(--spacing-md); padding-top: var(--spacing-md); border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                  <span class="text-xs text-muted">Updated 1d ago</span>
+                  <span class="text-xs text-muted">4 reports</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
+
