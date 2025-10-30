@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initUploadInteractions();
     const loc = location.pathname.split('/').pop() || '';
     if (loc === 'dashboard.html') loadDashboard();
-    if (loc === 'projects.html') loadProjects();
+    if (loc === 'projects.html') { loadProjects(); initCreateProjectModal(); }
     if (loc === 'findings.html') loadFindings();
   } catch (e) {
     // noop
@@ -171,6 +171,33 @@ function formatFileSize(bytes) {
 }
 
 // --- DASHBOARD, PROJECTS, FINDINGS ---
+
+function initCreateProjectModal() {
+  const submitBtn = document.getElementById('create-project-submit');
+  if (!submitBtn) return;
+  submitBtn.addEventListener('click', async () => {
+    const nameEl = document.getElementById('create-project-name');
+    const descEl = document.getElementById('create-project-desc');
+    const name = nameEl ? nameEl.value : '';
+    const desc = descEl ? descEl.value : '';
+    if (!name.trim()) { alert('Project name is required'); return; }
+    submitBtn.disabled = true;
+    try {
+      await fetchApi('/api/projects', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: name.trim(), description: desc.trim() })
+      });
+      const modal = document.getElementById('createProjectModal');
+      if (modal) modal.style.display = 'none';
+      await loadProjects();
+    } catch (e) {
+      alert('Failed to create project: ' + String(e));
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+}
 
 async function loadDashboard() {
   const cont = document.getElementById('dashboard-content');

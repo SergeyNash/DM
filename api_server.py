@@ -142,6 +142,28 @@ def api_projects():
     return jsonify(out)
 
 
+@APP.route("/api/projects", methods=["POST"])
+def api_projects_create():
+    db = load_db()
+    payload = request.get_json(silent=True) or {}
+    name = (payload.get("name") or "").strip()
+    if not name:
+        return jsonify({"error": "name is required"}), 400
+    description = (payload.get("description") or "").strip()
+    project = upsert_project(db, name)
+    if description:
+        project["description"] = description
+    project["updated_at"] = now_iso()
+    save_db(db)
+    return jsonify({
+        "id": project["id"],
+        "name": project["name"],
+        "description": project.get("description", ""),
+        "total_findings": len(project.get("findings", [])),
+        "updated_at": project.get("updated_at"),
+    })
+
+
 @APP.route("/api/findings", methods=["GET"])
 def api_findings():
     db = load_db()

@@ -112,20 +112,20 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form id="create-project-form">
           <div class="form-group">
             <label class="form-label">Project Name *</label>
-            <input type="text" class="form-input" placeholder="e.g., Backend API" required />
+            <input type="text" class="form-input" id="create-project-name" placeholder="e.g., Backend API" required />
           </div>
           
           <div class="form-group">
             <label class="form-label">Description</label>
-            <textarea class="form-input form-textarea" placeholder="Brief description of the project..."></textarea>
+            <textarea class="form-input form-textarea" id="create-project-desc" placeholder="Brief description of the project..."></textarea>
           </div>
           
           <div class="form-group">
             <label class="form-label">Repository URL (optional)</label>
-            <input type="url" class="form-input" placeholder="https://github.com/user/repo" />
+            <input type="url" class="form-input" id="create-project-repo" placeholder="https://github.com/user/repo" />
           </div>
         </form>
       </div>
@@ -133,7 +133,7 @@
         <button class="btn btn-outline" onclick="document.getElementById('createProjectModal').style.display='none'">
           Cancel
         </button>
-        <button class="btn btn-primary">
+        <button class="btn btn-primary" id="create-project-submit">
           Create Project
         </button>
       </div>
