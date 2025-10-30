@@ -50,10 +50,57 @@ function initFindingsSearch() {
   });
 }
 
-async function fetchApi(url, options={}) {
-  const resp = await fetch(url, options);
-  if (!resp.ok) throw new Error(await resp.text());
-  return await resp.json();
+// In Netlify static deploy, we run serverless: store data in localStorage
+const LS_KEY = 'sarifDb';
+function loadLocalDb() {
+  try { return JSON.parse(localStorage.getItem(LS_KEY) || '{"projects":[]}'); } catch { return { projects: [] }; }
+}
+function saveLocalDb(db) { localStorage.setItem(LS_KEY, JSON.stringify(db)); }
+function upsertLocalProject(db, name, description='') {
+  let p = db.projects.find(x => x.name === name);
+  if (!p) { p = { id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()), name, description, findings: [], tools: [], updated_at: new Date().toISOString() }; db.projects.push(p); }
+  return p;
+}
+function mapSeverity(level) {
+  const l = String(level || '').toLowerCase();
+  if (l === 'error') return 'high';
+  if (l === 'warning') return 'medium';
+  if (l === 'note') return 'low';
+  return 'info';
+}
+function processSarifToProject(db, sarifObj, projectName) {
+  const runs = sarifObj && Array.isArray(sarifObj.runs) ? sarifObj.runs : null; if (!runs || !runs[0]) return { total_findings: 0, tools: [] };
+  const run = runs[0];
+  const tool = ((run.tool||{}).driver||{}).name || 'Unknown';
+  const results = Array.isArray(run.results) ? run.results : [];
+  const rulesArr = (((run.tool||{}).driver||{}).rules) || [];
+  const rulesMap = {}; rulesArr.forEach(r => { rulesMap[r.id] = r; });
+  const prj = upsertLocalProject(db, projectName || 'Default Project');
+  let total = 0; const tools = new Set(prj.tools || []);
+  for (const res of results) {
+    total += 1;
+    const ruleId = res.ruleId || '';
+    const rule = rulesMap[ruleId] || {};
+    const level = (rule.defaultConfiguration && rule.defaultConfiguration.level) || 'note';
+    const message = (res.message && res.message.text) || (rule.name || ruleId);
+    const loc = Array.isArray(res.locations) && res.locations[0] ? res.locations[0] : {};
+    const phys = (loc.physicalLocation || {});
+    const file = ((phys.artifactLocation || {}).uri) || '';
+    prj.findings.push({
+      severity: mapSeverity(level),
+      ruleId: ruleId,
+      message: message,
+      file: file,
+      tool: tool,
+      status: 'new',
+      projectName: prj.name,
+      created_at: new Date().toISOString(),
+    });
+  }
+  if (tool) tools.add(tool);
+  prj.tools = Array.from(tools);
+  prj.updated_at = new Date().toISOString();
+  return { total_findings: total, tools: prj.tools };
 }
 
 // --- UPLOAD LOGIC ---
@@ -70,19 +117,24 @@ function initUploadInteractions() {
     if (uploadedFiles) uploadedFiles.style.display = 'block';
     // Показываем loader
     uploadedFiles.innerHTML = '<div class="spinner" style="margin:32px auto;"></div>';
-    let summaryData;
-    try {
-      const fd = new FormData();
-      Array.from(files).forEach(f => fd.append('file', f));
-      const projectSelect = document.getElementById('project-select');
-      if (projectSelect && projectSelect.value && projectSelect.value !== 'Select a project...') {
-        fd.append('project_name', projectSelect.value);
+    const projectSelect = document.getElementById('project-select');
+    const projectName = projectSelect && projectSelect.value && projectSelect.value !== 'Select a project...' ? projectSelect.value : 'Default Project';
+    // Client-side parse SARIF
+    let total_findings = 0; let total_size = 0; const tools = new Set();
+    const db = loadLocalDb();
+    for (const f of Array.from(files)) {
+      const text = await f.text(); total_size += f.size || 0;
+      try {
+        const obj = JSON.parse(text);
+        const res = processSarifToProject(db, obj, projectName);
+        total_findings += res.total_findings; res.tools.forEach(t => tools.add(t));
+      } catch (e) {
+        uploadedFiles.innerHTML = '<div class="empty-state-text" style="color:red">Ошибка парсинга '+(f.name||'')+': '+String(e)+'</div>';
+        return;
       }
-      summaryData = await fetchApi('/api/upload', {method:'POST', body: fd});
-    } catch (e) {
-      uploadedFiles.innerHTML = '<div class="empty-state-text" style="color:red">Ошибка загрузки: '+String(e)+'</div>';
-      return;
     }
+    saveLocalDb(db);
+    const summaryData = { total_files: files.length, total_findings, size_mb: (total_size/(1024*1024)).toFixed(2), tools: Array.from(tools), projects: db.projects.map(p=>({id:p.id,name:p.name})) };
     // Показываем имена файлов и summary
     renderUploadedFiles(Array.from(files), summaryData);
     renderUploadSummary(summaryData);
@@ -203,14 +255,10 @@ async function loadDashboard() {
   const cont = document.getElementById('dashboard-content');
   if (!cont) return;
   cont.innerHTML = '<div class="spinner" style="margin:64px auto"></div>';
-  let stats;
-  try {
-    stats = await fetchApi('/api/statistics');
-  } catch (e) {
-    cont.innerHTML = '<div class="empty-state-text" style="color:red">Ошибка загрузки статистики</div>';
-    return;
-  }
-  if (!stats || !stats.summary) {
+  const db = loadLocalDb();
+  let total_findings = 0; db.projects.forEach(p => total_findings += (p.findings||[]).length);
+  const stats = { summary: { total_findings, total_projects: db.projects.length, total_files: 0, size_mb: null } };
+  if (!stats || !stats.summary || (db.projects.length===0)) {
     cont.innerHTML = `<div class="empty-state">
       <div class="empty-state-icon">📊</div>
       <div class="empty-state-title">Нет данных</div>
@@ -238,13 +286,8 @@ async function loadProjects() {
   const grid = document.getElementById('projects-grid');
   if (!grid) return;
   grid.innerHTML = '<div class="spinner" style="margin:64px auto"></div>';
-  let projects;
-  try {
-    projects = await fetchApi('/api/projects');
-  } catch {
-    grid.innerHTML = '<div class="empty-state-text" style="color:red">Ошибка загрузки проектов</div>';
-    return;
-  }
+  const db = loadLocalDb();
+  const projects = db.projects || [];
   if (!Array.isArray(projects) || projects.length === 0) {
     grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">📁</div><div class="empty-state-title">Нет проектов</div></div>`;
     return;
@@ -272,13 +315,9 @@ async function loadFindings() {
   tbody.innerHTML = '<tr><td colspan="8"><div class="spinner"></div></td></tr>';
   const urlParams = new URLSearchParams(window.location.search);
   const projectId = urlParams.get('project_id');
-  let findings;
-  try {
-    findings = await fetchApi('/api/findings' + (projectId ? ('?project_id=' + encodeURIComponent(projectId)) : ''));
-  } catch {
-    tbody.innerHTML = '<tr><td colspan="8" style="color:red">Ошибка загрузки данных</td></tr>';
-    return;
-  }
+  const db = loadLocalDb();
+  let findings = [];
+  db.projects.forEach(p => { if (!projectId || p.id === projectId) findings = findings.concat(p.findings||[]); });
   if (!Array.isArray(findings) || findings.length === 0) {
     tbody.innerHTML = '<tr><td colspan="8" style="color:var(--text-tertiary)">Нет данных по находкам.</td></tr>';
     return;
