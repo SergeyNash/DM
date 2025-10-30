@@ -73,16 +73,47 @@ function initUploadInteractions() {
         container.style.display = 'flex';
         container.style.alignItems = 'center';
         container.style.gap = 'var(--spacing-md)';
-        container.innerHTML = `
-          <div style="width: 40px; height: 40px; background: #eff6ff; border-radius: var(--border-radius); display: flex; align-items: center; justify-content: center; font-size: 20px;">📄</div>
-          <div style="flex: 1;">
-            <div style="font-weight: 500; margin-bottom: 2px;">${file.name}</div>
-            <div class="text-xs text-muted">${formatFileSize(file.size)} • Pending</div>
-          </div>
-          <div style="display: flex; align-items: center; gap: 8px;">
-            <span class="badge badge-info" style="font-size: 11px;">Queued</span>
-          </div>
-        `;
+
+        const icon = document.createElement('div');
+        icon.style.width = '40px';
+        icon.style.height = '40px';
+        icon.style.background = '#eff6ff';
+        icon.style.borderRadius = 'var(--border-radius)';
+        icon.style.display = 'flex';
+        icon.style.alignItems = 'center';
+        icon.style.justifyContent = 'center';
+        icon.style.fontSize = '20px';
+        icon.textContent = '📄';
+
+        const info = document.createElement('div');
+        info.style.flex = '1';
+
+        const nameEl = document.createElement('div');
+        nameEl.style.fontWeight = '500';
+        nameEl.style.marginBottom = '2px';
+        // Use textContent to avoid injecting raw HTML from file.name
+        nameEl.textContent = file.name || '';
+
+        const metaEl = document.createElement('div');
+        metaEl.className = 'text-xs text-muted';
+        metaEl.textContent = `${formatFileSize(file.size)} • Pending`;
+
+        info.appendChild(nameEl);
+        info.appendChild(metaEl);
+
+        const right = document.createElement('div');
+        right.style.display = 'flex';
+        right.style.alignItems = 'center';
+        right.style.gap = '8px';
+        const badge = document.createElement('span');
+        badge.className = 'badge badge-info';
+        badge.style.fontSize = '11px';
+        badge.textContent = 'Queued';
+        right.appendChild(badge);
+
+        container.appendChild(icon);
+        container.appendChild(info);
+        container.appendChild(right);
         uploadedFiles.appendChild(container);
       });
     }
