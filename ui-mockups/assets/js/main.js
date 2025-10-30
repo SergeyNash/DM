@@ -5,10 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
     setActiveSidebarItem();
     initFindingsSearch();
     initUploadInteractions();
-    const loc = location.pathname.split('/').pop() || '';
-    if (loc === 'dashboard.html') loadDashboard();
-    if (loc === 'projects.html') { loadProjects(); initCreateProjectModal(); }
-    if (loc === 'findings.html') loadFindings();
+    // Initialize page features based on element presence (robust to pretty URLs)
+    if (document.getElementById('dashboard-content')) loadDashboard();
+    if (document.getElementById('projects-grid')) { loadProjects(); initCreateProjectModal(); }
+    if (document.getElementById('findings-tbody')) loadFindings();
   } catch (e) {
     // noop
   }
@@ -108,7 +108,18 @@ function initUploadInteractions() {
   const fileInput = document.getElementById('file-input');
   const uploadedFiles = document.getElementById('uploaded-files');
   const uploadSummary = document.getElementById('upload-summary');
-  const uploadArea = document.querySelector('.upload-area');
+  const uploadArea = document.getElementById('upload-area') || document.querySelector('.upload-area');
+  const startBtn = document.getElementById('btn-start-upload');
+  const cancelBtn = document.getElementById('btn-cancel-upload');
+  const dashboardBtn = document.getElementById('btn-upload-from-dashboard');
+
+  if (dashboardBtn) {
+    dashboardBtn.addEventListener('click', () => { window.location.href = 'upload.html'; });
+  }
+
+  if (cancelBtn) {
+    cancelBtn.addEventListener('click', () => { window.location.href = 'projects.html'; });
+  }
 
   if (!fileInput || !uploadArea) return;
 
@@ -205,9 +216,19 @@ function initUploadInteractions() {
   }
 
   fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
+  uploadArea.addEventListener('dragover', (e) => { e.preventDefault(); uploadArea.classList.add('drag-over'); });
+  uploadArea.addEventListener('dragleave', () => { uploadArea.classList.remove('drag-over'); });
   uploadArea.addEventListener('drop', (e) => {
     e.preventDefault(); uploadArea.classList.remove('drag-over'); handleFiles(e.dataTransfer.files);
   });
+
+  if (startBtn) {
+    startBtn.addEventListener('click', () => {
+      if (fileInput && fileInput.files && fileInput.files.length) {
+        handleFiles(fileInput.files);
+      }
+    });
+  }
 }
 
 function formatFileSize(bytes) {
@@ -226,6 +247,16 @@ function formatFileSize(bytes) {
 
 function initCreateProjectModal() {
   const submitBtn = document.getElementById('create-project-submit');
+  const openBtn = document.getElementById('btn-open-create-project-modal');
+  const closeBtn = document.getElementById('btn-close-create-project-modal');
+  const cancelBtn = document.getElementById('btn-cancel-create-project-modal');
+  const overlay = document.getElementById('createProjectModal');
+
+  if (openBtn && overlay) openBtn.addEventListener('click', () => { overlay.style.display = 'flex'; });
+  if (closeBtn && overlay) closeBtn.addEventListener('click', () => { overlay.style.display = 'none'; });
+  if (cancelBtn && overlay) cancelBtn.addEventListener('click', () => { overlay.style.display = 'none'; });
+  if (overlay) overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.style.display = 'none'; });
+
   if (!submitBtn) return;
   submitBtn.addEventListener('click', async () => {
     const nameEl = document.getElementById('create-project-name');
@@ -235,11 +266,10 @@ function initCreateProjectModal() {
     if (!name.trim()) { alert('Project name is required'); return; }
     submitBtn.disabled = true;
     try {
-      await fetchApi('/api/projects', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: name.trim(), description: desc.trim() })
-      });
+      // Local create
+      const db = loadLocalDb();
+      const p = upsertLocalProject(db, name.trim(), desc.trim());
+      saveLocalDb(db);
       const modal = document.getElementById('createProjectModal');
       if (modal) modal.style.display = 'none';
       await loadProjects();

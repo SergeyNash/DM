@@ -94,10 +94,7 @@
             </div>
             <div class="card-body">
               <!-- Drag & Drop Area -->
-              <div class="upload-area" 
-                   ondragover="event.preventDefault(); this.classList.add('drag-over');" 
-                   ondragleave="this.classList.remove('drag-over');"
-                   ondrop="event.preventDefault(); this.classList.remove('drag-over'); alert('File dropped!');">
+              <div class="upload-area" id="upload-area">
                 <div class="upload-icon">📁</div>
                 <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 8px;">
                   Drag & drop SARIF files here
@@ -230,10 +227,10 @@
 
           <!-- Action Buttons -->
           <div style="margin-top: var(--spacing-2xl); display: flex; justify-content: flex-end; gap: var(--spacing-md);">
-            <button class="btn btn-outline" onclick="window.location.href='projects.html'">
+            <button class="btn btn-outline" id="btn-cancel-upload">
               Cancel
             </button>
-            <button class="btn btn-primary" onclick="alert('Upload started!'); document.getElementById('uploaded-files').style.display='block'; document.getElementById('upload-summary').style.display='block';">
+            <button class="btn btn-primary" id="btn-start-upload">
               <span>⬆️</span>
               Start Upload
             </button>
