@@ -74,6 +74,10 @@ function initUploadInteractions() {
     try {
       const fd = new FormData();
       Array.from(files).forEach(f => fd.append('file', f));
+      const projectSelect = document.getElementById('project-select');
+      if (projectSelect && projectSelect.value && projectSelect.value !== 'Select a project...') {
+        fd.append('project_name', projectSelect.value);
+      }
       summaryData = await fetchApi('/api/upload', {method:'POST', body: fd});
     } catch (e) {
       uploadedFiles.innerHTML = '<div class="empty-state-text" style="color:red">Ошибка загрузки: '+String(e)+'</div>';

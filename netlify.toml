@@ -2,6 +2,12 @@
   publish = "ui-mockups"
   command = ""
 
+[[redirects]]
+  from = "/api/*"
+  to = "http://localhost:8000/:splat"
+  status = 200
+  force = true
+
 [[headers]]
   for = "/*"
   [headers.values]
