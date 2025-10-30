@@ -1548,72 +1548,48 @@ CREATE INDEX IX_FindingComments_FindingId ON FindingComments(FindingId);
 
 ---
 
-## 9. Deployment Architecture (PoC)
+## 9. Deployment Architecture (Fullstack Publish)
 
-```
-┌────────────────────────────────────────────────┐
-│           Development Machine                   │
-│                                                 │
-│  ┌──────────────────────────────────────────┐  │
-│  │   Angular Dev Server (ng serve)          │  │
-│  │   Port 4200                              │  │
-│  └──────────────────────────────────────────┘  │
-│                                                 │
-│  ┌──────────────────────────────────────────┐  │
-│  │   .NET API (dotnet run)                  │  │
-│  │   Port 5000                              │  │
-│  └──────────────────────────────────────────┘  │
-│                                                 │
-│  ┌──────────────────────────────────────────┐  │
-│  │   SQLite DB (sarif-manager.db)           │  │
-│  │   File: ./data/sarif-manager.db          │  │
-│  └──────────────────────────────────────────┘  │
-│                                                 │
-│  ┌──────────────────────────────────────────┐  │
-│  │   File Storage                           │  │
-│  │   Directory: ./uploads/                  │  │
-│  └──────────────────────────────────────────┘  │
-└────────────────────────────────────────────────┘
-```
+### Монорепозиторий: структура и сборка
 
-### Production Deployment (Future)
+repo-root/
+├── frontend/   # Angular 17+
+├── backend/    # ASP.NET Core Web API (.NET 8, wwwroot статичные)
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                    Load Balancer                        │
-└───────────────────────┬─────────────────────────────────┘
-                        │
-        ┌───────────────┴───────────────┐
-        │                               │
-┌───────▼────────┐            ┌─────────▼────────┐
-│  Web Server 1  │            │  Web Server 2    │
-│  (Nginx)       │            │  (Nginx)         │
-│  Static Files  │            │  Static Files    │
-└───────┬────────┘            └─────────┬────────┘
-        │                               │
-        └───────────────┬───────────────┘
-                        │
-        ┌───────────────▼───────────────┐
-        │                               │
-┌───────▼────────┐            ┌─────────▼────────┐
-│  API Server 1  │            │  API Server 2    │
-│  (.NET)        │            │  (.NET)          │
-└───────┬────────┘            └─────────┬────────┘
-        │                               │
-        └───────────────┬───────────────┘
-                        │
-        ┌───────────────▼───────────────┐
-        │    PostgreSQL Cluster         │
-        │    (Primary + Replicas)       │
-        └───────────────────────────────┘
+### Инструкция по деплою (publish)
 
-        ┌───────────────────────────────┐
-        │    Object Storage (S3/Azure)  │
-        │    SARIF files                │
-        └───────────────────────────────┘
+1. Перейдите в папку frontend и соберите Angular:
+   ```bash
+   cd frontend
+   npm install
+   npm run build -- --output-path=../backend/wwwroot --configuration production
+   ```
+   Все статики Angular будут в backend/wwwroot
+
+2. Сборка и запуск backend:
+   ```bash
+   cd ../backend
+   dotnet build
+   dotnet run   # или dotnet publish и запуск собранного
+   ```
+
+3. Теперь SPA и API доступны на одном адресе/сервере.
+
+- Для крупного деплоя: используйте dotnet publish (Release), можно завернуть в Docker или развернуть на любом VPS или Windows/IIS.
+
+### Пример Startup (.NET 8+)
+
+```csharp
+app.UseDefaultFiles();
+app.UseStaticFiles(); // (отдаёт SPA)
+app.UseRouting();
+app.MapControllers();
+app.MapFallbackToFile("index.html"); // SPA fallback (Angular роутинг)
 ```
 
----
+### Почему не Netlify/Vercel/etc только для фронта?
+- Fullstack publish удобнее: нет CORS, нет необходимости раздельного деплоя и настройки внешнего API.
+- Любой хостинг с .NET Core (Linux/Windows/IP виртуалка, облако, Heroku, Azure и др.)
 
 ## 10. Testing Strategy
 

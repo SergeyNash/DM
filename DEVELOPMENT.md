@@ -779,3 +779,31 @@ public async Task<IActionResult> GetById(int id) { }
 
 *Документ может дополняться в процессе разработки.*
 
+## Деплой и запуск
+
+### Пошаговая инструкция
+
+1. Соберите фронтенд и скопируйте сборку Angular в backend/wwwroot:
+
+   ```bash
+   cd frontend
+   npm install
+   npm run build -- --output-path=../backend/wwwroot --configuration production
+   ```
+
+2. Сборка и запуск backend:
+
+   ```bash
+   cd ../backend
+   dotnet build
+   dotnet run
+   ```
+   
+   Теперь single-page frontend и API отдаются одним процессом (port 5000 или другой по настройке)
+
+3. Продакшен деплой (если требуется):
+
+   - Выполнить `dotnet publish -c Release` и развернуть артефакт на сервере или в Docker.
+
+---
+

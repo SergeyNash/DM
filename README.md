@@ -242,6 +242,24 @@ python test_parser.py
 
 ---
 
+## Быстрый старт (Fullstack)
+
+1. Соберите и скопируйте фронтенд в wwwroot backend:
+   ```bash
+   cd frontend
+   npm install
+   npm run build -- --output-path=../backend/wwwroot --configuration production
+   ```
+2. Запустите backend:
+   ```bash
+   cd ../backend
+   dotnet build
+   dotnet run
+   ```
+   Теперь frontend и API работают на одном порту.
+
+---
+
 ## 🏗️ Архитектура
 
 ### 🎭 High-Level Overview
